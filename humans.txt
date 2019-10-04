@@ -3,13 +3,11 @@
 
 # TEAM
 
-    Jenny Rakete - @_Jenny_Davis
-
-# THANKS
-
-    <name>
+    Developer: Jenny Rakete
+    Twitter: @_Jenny_Davis
+    GitHub: /quadcerebrumal
 
 # TECHNOLOGY COLOPHON
 
-    CSS3, HTML5
-    Apache Server Configs, jQuery, Modernizr, Normalize.css
+    CSS3, HTML5, JavaScript
+    Apache Server Configs, jQuery, Modernizr, Materialize, Normalize.css
