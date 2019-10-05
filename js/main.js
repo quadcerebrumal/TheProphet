@@ -120,7 +120,31 @@ function tick() {
   }
 }
 
+function save() {
+  let save = JSON.stringify({
+    'followers': followers,
+    'money': money,
+    'buildings': buildings,
+    'upgrades': upgrades,
+    'money_per_follower': money_per_follower,
+    'follower_per_click': followers_per_click,
+    'recruiting': recruiting,
+  });
+  document.cookie = "save=" + save;
+}
+
 function init() {
+  //ES2016
+  if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
+    let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+    followers = save['followers'];
+    money = save['money'];
+    buildings = save['buildings'];
+    upgrades = save['upgrades'];
+    money_per_follower = save['money_per_follower'];
+    followers_per_click = save['followers_per_click'];
+    recruiting = save['recruiting'];
+  }
   // Make the recruit button recruit
   document.getElementById("recruit-btn").addEventListener("click", function () {
     followers += followers_per_click;
@@ -142,10 +166,13 @@ function init() {
       upgrades[upgrade].description + "<span id='upgrade-" + upgrades[upgrade].id + "-price'><br>Price: $ " + upgrades[upgrade].price + "</span></span><br>" +
       "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
   }
-  const intervalID = window.setInterval(() => {
+  const runtime = window.setInterval(() => {
     tick();
     update_display();
   }, 100);
+  const autosave = window.setInterval(() => {
+    save();
+  })
 }
 
 init();
