@@ -1,4 +1,3 @@
-
 let followers = 0;
 let money = 0;
 let followers_per_click = 1;
@@ -107,6 +106,8 @@ function update_display() {
     if(!upgrades[upgrade].owned) {
       if(upgrades[upgrade].price <= money) {
         $("#upgrade-"+upgrades[upgrade].id).removeClass("red").addClass("teal");
+      } else {
+        $("#upgrade-"+upgrades[upgrade].id).removeClass("teal").addClass("red");
       }
     }
   }
