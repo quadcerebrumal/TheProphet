@@ -39,10 +39,15 @@ class Building {
     this.effect = effect;
     this.init = init;
     this.count = 0;
+    this.unlocked = false;
   }
 
   execute() {
     this.effect();
+  }
+
+  unlock() {
+    this.unlocked = true;
   }
 
   buy() {
@@ -60,28 +65,43 @@ class Building {
 let buildings = [
   new Building("meeting-place", "Meeting place", "Recruits 1 follower in 10 seconds", 2, function() {
     followers += this.count * 0.01 * recruiting;
-  }, function() { $("#building-meeting-place").hide(); }, 1.1),
+  }, function() {  }, 1.1),
   new Building("church", "Church", "Recruits 1 follower per second", 100, function() {
     followers += this.count * 0.1 * recruiting;
-  }, function() { $("#building-church").hide(); }, 1.4),
+  }, function() {  }, 1.4),
   new Building("sacrificial-place", "Sacrificial Place", "Produces $ 0.01 per follower per second", 500, function() {
     money += money_per_follower * followers / 10;
-  }, function() { $("#building-sacrificial-place").hide(); }, 1.2),
+  }, function() {  }, 1.2),
 ];
 
 
 let upgrades = [
   new Upgrade("unlock-meeting-place", "Unlock Meeting Place", "Unlocks the meeting place", 2, function () {
-    $("#building-meeting-place").show();
+    for(let building in buildings) {
+      if(buildings[building].id === "meeting-place") {
+        buildings[building].unlock();
+        break;
+      }
+    }
   }),
   new Upgrade("double-fee-0", "Higher fee", "Increases your followers' fee by 100%", 50, function () {
     money_per_follower += money_per_follower;
   }),
   new Upgrade("unlock-church", "Unlock Church", "Unlocks the Church", 100, function () {
-    $("#building-church").show();
+    for(let building in buildings) {
+      if(buildings[building].id === "church") {
+        buildings[building].unlock();
+        break;
+      }
+    }
   }),
   new Upgrade("unlock-sacrificial-place", "Unlock Sacrificial Place", "Unlocks the Sacrificial Place", 500, function() {
-    $("#building-sacrificial-place").show();
+    for(let building in buildings) {
+      if(buildings[building].id === "sacrificial-place") {
+        buildings[building].unlock();
+        break;
+      }
+    }
   }),
   new Upgrade("ancient-relic", "Ancient relic", "Increases recruiting by 50%", 500, function () {
     recruiting += recruiting / 2;
@@ -101,6 +121,11 @@ function update_display() {
   for(let building in buildings) {
     $("#building-" + buildings[building].id + "-price").text(buildings[building].price.toFixed(2));
     $("#building-" + buildings[building].id + "-amount").text(buildings[building].count);
+    if (buildings[building].unlocked) {
+      $("#building-"+buildings[building].id).show();
+    } else {
+      $("#building-"+buildings[building].id).hide();
+    }
   }
   for(let upgrade in upgrades) {
     if(!upgrades[upgrade].owned) {
@@ -126,7 +151,8 @@ function save() {
   for(let building in buildings) {
     buildings_save[buildings[building].id] = {
       'count': buildings[building].count,
-      'price': buildings[building].price
+      'price': buildings[building].price,
+      'unlocked': buildings[building].unlocked
     }
   }
   for(let upgrade in upgrades) {
@@ -147,32 +173,7 @@ function save() {
 }
 
 function init() {
-  //ES2016
-  if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
-    let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
-    followers = save['followers'];
-    money = save['money'];
-    for(let save_building in save['buildings']) {
-      for(let building in buildings) {
-        if(buildings[building].id === save_building) {
-          buildings[building].count = save['buildings'][save_building]['count'];
-          buildings[building].price = save['buildings'][save_building]['price'];
-        }
-      }
-    }
-    for(let save_upgrade in save['upgrades']) {
-      for(let upgrade in upgrades) {
-        if(upgrades[upgrade].id === save_upgrade) {
-          upgrades[upgrade].owned = save['upgrades'][save_upgrade]['owned'];
-          console.log(save_upgrade);
-          console.log(save['upgrades'][save_upgrade]["owned"])
-        }
-      }
-    }
-    money_per_follower = save['money_per_follower'];
-    followers_per_click = save['followers_per_click'];
-    recruiting = save['recruiting'];
-  }
+
   // Make the recruit button recruit
   document.getElementById("recruit-btn").addEventListener("click", function () {
     followers += followers_per_click;
@@ -193,6 +194,39 @@ function init() {
       "<div style='padding-bottom: 10px' class='card col s12 red' id='upgrade-"+upgrades[upgrade].id+"'><h6>" + upgrades[upgrade].name + "</h6><span>" +
       upgrades[upgrade].description + "<span id='upgrade-" + upgrades[upgrade].id + "-price'><br>Price: $ " + upgrades[upgrade].price + "</span></span><br>" +
       "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
+  }
+  // Read Cookie save if possible
+  if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
+    let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+    followers = save['followers'];
+    money = save['money'];
+    for(let save_building in save['buildings']) {
+      for(let building in buildings) {
+        if(buildings[building].id === save_building) {
+          buildings[building].count = save['buildings'][save_building]['count'];
+          buildings[building].price = save['buildings'][save_building]['price'];
+          buildings[building].unlocked = save['buildings'][save_building]['unlocked'];
+          if (buildings[building].unlocked) {
+            buildings[building].unlock();
+          }
+        }
+      }
+    }
+    for(let save_upgrade in save['upgrades']) {
+      for(let upgrade in upgrades) {
+        if(upgrades[upgrade].id === save_upgrade) {
+          upgrades[upgrade].owned = save['upgrades'][save_upgrade]['owned'];
+          if(upgrades[upgrade].owned) {
+            $("#upgrade-" + upgrades[upgrade].id + "-btn").remove();
+            $("#upgrade-" + upgrades[upgrade].id + "-price").remove();
+            $("#upgrade-" + upgrades[upgrade].id).removeClass("teal").addClass("green accent-4");
+          }
+        }
+      }
+    }
+    money_per_follower = save['money_per_follower'];
+    followers_per_click = save['followers_per_click'];
+    recruiting = save['recruiting'];
   }
   const runtime = window.setInterval(() => {
     tick();
