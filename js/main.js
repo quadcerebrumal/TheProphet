@@ -121,13 +121,26 @@ function tick() {
 }
 
 function save() {
+  let buildings_save = {};
+  let upgrades_save = {};
+  for(let building in buildings) {
+    buildings_save[buildings[building].id] = {
+      'count': buildings[building].count,
+      'price': buildings[building].price
+    }
+  }
+  for(let upgrade in upgrades) {
+    upgrades_save[upgrades[upgrade].id] = {
+      'owned': upgrades[upgrade].owned
+    }
+  }
   let save = JSON.stringify({
     'followers': followers,
     'money': money,
-    'buildings': buildings,
-    'upgrades': upgrades,
+    'buildings': buildings_save,
+    'upgrades': upgrades_save,
     'money_per_follower': money_per_follower,
-    'follower_per_click': followers_per_click,
+    'followers_per_click': followers_per_click,
     'recruiting': recruiting,
   });
   document.cookie = "save=" + save;
@@ -139,8 +152,23 @@ function init() {
     let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
     followers = save['followers'];
     money = save['money'];
-    buildings = save['buildings'];
-    upgrades = save['upgrades'];
+    for(let save_building in save['buildings']) {
+      for(let building in buildings) {
+        if(buildings[building].id === save_building) {
+          buildings[building].count = save['buildings'][save_building]['count'];
+          buildings[building].price = save['buildings'][save_building]['price'];
+        }
+      }
+    }
+    for(let save_upgrade in save['upgrades']) {
+      for(let upgrade in upgrades) {
+        if(upgrades[upgrade].id === save_upgrade) {
+          upgrades[upgrade].owned = save['upgrades'][save_upgrade]['owned'];
+          console.log(save_upgrade);
+          console.log(save['upgrades'][save_upgrade]["owned"])
+        }
+      }
+    }
     money_per_follower = save['money_per_follower'];
     followers_per_click = save['followers_per_click'];
     recruiting = save['recruiting'];
@@ -172,7 +200,7 @@ function init() {
   }, 100);
   const autosave = window.setInterval(() => {
     save();
-  })
+  }, 5000);
 }
 
 init();
