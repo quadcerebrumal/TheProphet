@@ -65,13 +65,14 @@ class Building {
 let buildings = [
   new Building("meeting-place", "Meeting place", "Recruits 1 follower in 10 seconds", 2, function() {
     followers += this.count * 0.01 * recruiting;
-  }, function() {  }, 1.1),
+  }, function() {  }, 1.2),
   new Building("church", "Church", "Recruits 1 follower per second", 100, function() {
     followers += this.count * 0.1 * recruiting;
-  }, function() {  }, 1.4),
-  new Building("sacrificial-place", "Sacrificial Place", "Produces $ 0.01 per follower per second", 500, function() {
-    money += money_per_follower * followers / 10;
   }, function() {  }, 1.2),
+  new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per follower per second", 500, function() {
+    money += money_per_follower * followers / 10;
+    $("#building-sacrificial-place-production").text(money_per_follower);
+  }, function() {  }, 1.2)
 ];
 
 
