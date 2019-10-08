@@ -113,6 +113,9 @@ let upgrades = [
   new Upgrade("sacred-texts", "Sacred Texts", "Increases recruiting by 50%", 3000, function () {
     recruiting += recruiting / 2;
   }),
+  new Upgrade("tax-exempt", "Tax-Exempt", "Increases money earnings by 30%", 100, function () {
+    money_per_follower = money_per_follower * 1.30;
+  })
 ];
 
 
