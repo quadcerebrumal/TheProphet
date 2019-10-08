@@ -6,13 +6,14 @@ let recruiting = 1;
 
 
 class Upgrade {
-  constructor(id, name, description, price, effect) {
+  constructor(id, name, description, price, effect, shown) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.price = price;
     this.effect = effect;
     this.owned = false;
+    this.shown = shown;
   }
   buy() {
     if(money >= this.price) {
@@ -84,10 +85,10 @@ let upgrades = [
         break;
       }
     }
-  }),
+  }, () => {return true}),
   new Upgrade("double-fee-0", "Higher fee", "Increases your followers' fee by 100%", 50, function () {
     money_per_follower += money_per_follower;
-  }),
+  }, () => {return true}),
   new Upgrade("unlock-church", "Unlock Church", "Unlocks the Church", 100, function () {
     for(let building in buildings) {
       if(buildings[building].id === "church") {
@@ -95,7 +96,7 @@ let upgrades = [
         break;
       }
     }
-  }),
+  }, () => {return true}),
   new Upgrade("unlock-sacrificial-place", "Unlock Sacrificial Place", "Unlocks the Sacrificial Place", 500, function() {
     for(let building in buildings) {
       if(buildings[building].id === "sacrificial-place") {
@@ -103,19 +104,19 @@ let upgrades = [
         break;
       }
     }
-  }),
+  }, () => {return true}),
   new Upgrade("ancient-relic", "Ancient relic", "Increases recruiting by 50%", 500, function () {
     recruiting += recruiting / 2;
-  }),
+  }, () => {return true}),
   new Upgrade("ceremonies", "Ceremonies", "Increases recruiting by 50%", 1500, function () {
     recruiting += recruiting / 2;
-  }),
+  }, () => {return true}),
   new Upgrade("sacred-texts", "Sacred Texts", "Increases recruiting by 50%", 3000, function () {
     recruiting += recruiting / 2;
-  }),
+  }, () => {return true}),
   new Upgrade("tax-exempt", "Tax-Exempt", "Increases money earnings by 30%", 100, function () {
-    money_per_follower = money_per_follower * 1.30;
-  })
+    money_per_follower = money_per_follower * 1.4285714;
+  }, () => {return followers > 100000})
 ];
 
 
@@ -133,10 +134,14 @@ function update_display() {
   }
   for(let upgrade in upgrades) {
     if(!upgrades[upgrade].owned) {
-      if(upgrades[upgrade].price <= money) {
-        $("#upgrade-"+upgrades[upgrade].id).removeClass("red").addClass("teal");
+      if (upgrades[upgrade].shown()) {
+        if (upgrades[upgrade].price <= money) {
+          $("#upgrade-" + upgrades[upgrade].id).removeClass("red").addClass("teal");
+        } else {
+          $("#upgrade-" + upgrades[upgrade].id).removeClass("teal").addClass("red");
+        }
       } else {
-        $("#upgrade-"+upgrades[upgrade].id).removeClass("teal").addClass("red");
+        $("#upgrade-" + upgrades[upgrade].id).hide();
       }
     }
   }
