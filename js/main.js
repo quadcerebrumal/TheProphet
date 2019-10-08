@@ -70,7 +70,7 @@ let buildings = [
     followers += this.count * 0.1 * recruiting;
   }, function() {  }, 1.2),
   new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per follower per second", 500, function() {
-    money += money_per_follower * followers / 10;
+    money += ( money_per_follower * followers / 10 ) * this.count;
     $("#building-sacrificial-place-production").text(money_per_follower);
   }, function() {  }, 1.2)
 ];
