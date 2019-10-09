@@ -133,8 +133,9 @@ function update_display() {
     }
   }
   for(let upgrade in upgrades) {
-    if(!upgrades[upgrade].owned) {
+    if(upgrades[upgrade].owned === false) {
       if (upgrades[upgrade].shown()) {
+        $("#upgrade-" + upgrades[upgrade].id).show();
         if (upgrades[upgrade].price <= money) {
           $("#upgrade-" + upgrades[upgrade].id).removeClass("red").addClass("teal");
         } else {
@@ -237,11 +238,11 @@ function init() {
     followers_per_click = save['followers_per_click'];
     recruiting = save['recruiting'];
   }
-  const runtime = window.setInterval(() => {
+  window.setInterval(() => {
     tick();
     update_display();
   }, 100);
-  const autosave = window.setInterval(() => {
+  window.setInterval(() => {
     save();
   }, 5000);
 }
