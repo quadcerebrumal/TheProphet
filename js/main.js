@@ -1,9 +1,26 @@
-let followers = 0;
-let money = 0;
 let followers_per_click = 1;
 let money_per_follower = 0.01;
 let recruiting = 1;
 
+
+class Wallet {
+  constructor() {
+    this.amount = 0;
+    this.total = 0;
+  }
+
+  add(amount) {
+    this.amount += amount;
+    this.total += amount;
+  }
+
+  remove(amount) {
+    this.amount -= amount;
+  }
+}
+
+let money = new Wallet();
+let followers = new Wallet();
 
 class Upgrade {
   constructor(id, name, description, price, effect, shown) {
@@ -16,8 +33,8 @@ class Upgrade {
     this.shown = shown;
   }
   buy() {
-    if(money >= this.price) {
-      money -= this.price;
+    if(money.amount >= this.price) {
+      money.remove(this.price);
       this.owned = true;
       this.effect();
       $("#upgrade-"+this.id+"-btn").remove();
@@ -52,8 +69,8 @@ class Building {
   }
 
   buy() {
-    if (money >= this.price) {
-      money -= this.price;
+    if (money.amount >= this.price) {
+      money.remove(this.price);
       this.price = this.price * this.price_inc;
       this.count++;
     } else {
@@ -65,13 +82,13 @@ class Building {
 
 let buildings = [
   new Building("meeting-place", "Meeting place", "Recruits 1 follower in 10 seconds", 2, function() {
-    followers += this.count * 0.01 * recruiting;
+    followers.add(this.count * 0.01 * recruiting);
   }, function() {  }, 1.2),
   new Building("church", "Church", "Recruits 1 follower per second", 100, function() {
-    followers += this.count * 0.1 * recruiting;
+    followers.add(this.count * 0.1 * recruiting);
   }, function() {  }, 1.2),
   new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per follower per second", 500, function() {
-    money += ( money_per_follower * followers / 10 ) * this.count;
+    money.add(money_per_follower * followers.amount / 10 * this.count);
     $("#building-sacrificial-place-production").text(money_per_follower.toFixed(2));
   }, function() {  }, 1.2)
 ];
@@ -121,8 +138,8 @@ let upgrades = [
 
 
 function update_display() {
-  $("#follower-stat").text(followers.toFixed(0));
-  $("#money-stat").text(money.toFixed(2));
+  $("#follower-stat").text(followers.amount.toFixed(0));
+  $("#money-stat").text(money.amount.toFixed(2));
   for(let building in buildings) {
     $("#building-" + buildings[building].id + "-price").text(buildings[building].price.toFixed(2));
     $("#building-" + buildings[building].id + "-amount").text(buildings[building].count);
@@ -136,7 +153,7 @@ function update_display() {
     if(upgrades[upgrade].owned === false) {
       if (upgrades[upgrade].shown()) {
         $("#upgrade-" + upgrades[upgrade].id).show();
-        if (upgrades[upgrade].price <= money) {
+        if (upgrades[upgrade].price <= money.amount) {
           $("#upgrade-" + upgrades[upgrade].id).removeClass("red").addClass("teal");
         } else {
           $("#upgrade-" + upgrades[upgrade].id).removeClass("teal").addClass("red");
@@ -149,7 +166,7 @@ function update_display() {
 }
 
 function tick() {
-  money += followers * money_per_follower * 0.1;
+  money.add(followers.amount * money_per_follower * 0.1);
   for (let building in buildings) {
     buildings[building].execute();
   }
@@ -171,8 +188,10 @@ function save() {
     }
   }
   let save = JSON.stringify({
-    'followers': followers,
-    'money': money,
+    'followers': followers.amount,
+    'followers_total': followers.total,
+    'money': money.amount,
+    'money_total': money.total,
     'buildings': buildings_save,
     'upgrades': upgrades_save,
     'money_per_follower': money_per_follower,
@@ -186,7 +205,13 @@ function init() {
 
   // Make the recruit button recruit
   document.getElementById("recruit-btn").addEventListener("click", function () {
-    followers += followers_per_click;
+    followers.add(followers_per_click * recruiting);
+  });
+  // Make the reset button reset
+  document.getElementById("reset-btn").addEventListener("click", function () {
+    document.cookie = "save=;Max-Age=-99999999;";
+    window.location.replace(window.location);
+    M.toast({html: "Your game was reset."});
   });
   // Put the buildings into the buildings tab
   document.getElementById("buildings-card").innerHTML = '';
@@ -208,8 +233,10 @@ function init() {
   // Read Cookie save if possible
   if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
     let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
-    followers = save['followers'];
-    money = save['money'];
+    followers.amount = save['followers'];
+    followers.total = save['followers_total'];
+    money.amount = save['money'];
+    money.total = save['money_total'];
     for(let save_building in save['buildings']) {
       for(let building in buildings) {
         if(buildings[building].id === save_building) {
