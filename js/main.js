@@ -102,10 +102,10 @@ let upgrades = [
         break;
       }
     }
-  }, () => {return true}),
+  }, () => {return followers.total > 10}),
   new Upgrade("double-fee-0", "Higher fee", "Increases your followers' fee by 100%", 50, function () {
     money_per_follower += money_per_follower;
-  }, () => {return true}),
+  }, () => {return money.total > 200}),
   new Upgrade("unlock-church", "Unlock Church", "Unlocks the Church", 100, function () {
     for(let building in buildings) {
       if(buildings[building].id === "church") {
@@ -113,7 +113,7 @@ let upgrades = [
         break;
       }
     }
-  }, () => {return true}),
+  }, () => {return buildings[0].count > 4}),
   new Upgrade("unlock-sacrificial-place", "Unlock Sacrificial Place", "Unlocks the Sacrificial Place", 500, function() {
     for(let building in buildings) {
       if(buildings[building].id === "sacrificial-place") {
@@ -121,19 +121,23 @@ let upgrades = [
         break;
       }
     }
-  }, () => {return true}),
+  }, () => {return buildings[1].count > 4}),
   new Upgrade("ancient-relic", "Ancient relic", "Increases recruiting by 50%", 500, function () {
     recruiting += recruiting / 2;
-  }, () => {return true}),
+  }, () => {return followers.total > 100}),
   new Upgrade("ceremonies", "Ceremonies", "Increases recruiting by 50%", 1500, function () {
     recruiting += recruiting / 2;
-  }, () => {return true}),
+  }, () => {return money.total > 10000}),
   new Upgrade("sacred-texts", "Sacred Texts", "Increases recruiting by 50%", 3000, function () {
     recruiting += recruiting / 2;
-  }, () => {return true}),
-  new Upgrade("tax-exempt", "Tax-Exempt", "Increases money earnings by 30%", 100, function () {
+  }, () => {return followers.total > 1000 }),
+  new Upgrade("tax-exempt", "Tax-Exempt", "Removes the 30% taxes from your in-flow", 100, function () {
     money_per_follower = money_per_follower * 1.4285714;
-  }, () => {return followers > 100000})
+  }, () => {return followers.total > 10000}),
+  new Upgrade("central-control", "Secret central control", "Decreases followers leaving and increases fee by 200% the cult through blackmail.", 500000, function () {
+    recruiting = recruiting * 1.5;
+    money_per_follower = money_per_follower * 3
+  }, () => {return followers.total > 100000})
 ];
 
 
