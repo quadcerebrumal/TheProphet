@@ -269,3 +269,6 @@ textarea {
   top: 0;
   z-index: 1000;
 }
+.patreon-red {
+  background-color: #E85B46 !important;
+}
