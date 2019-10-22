@@ -237,15 +237,16 @@ function init() {
       "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
   }
   // Read Cookie save if possible
+  let followers_per_click;
   if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
     let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*=\s*([^;]*).*$)|^.*$/, "$1"));
     followers.amount = save['followers'];
     followers.total = save['followers_total'];
     money.amount = save['money'];
     money.total = save['money_total'];
-    for(let save_building in save['buildings']) {
-      for(let building in buildings) {
-        if(buildings[building].id === save_building) {
+    for (let save_building in save['buildings']) {
+      for (let building in buildings) {
+        if (buildings[building].id === save_building) {
           buildings[building].count = save['buildings'][save_building]['count'];
           buildings[building].price = save['buildings'][save_building]['price'];
           buildings[building].unlocked = save['buildings'][save_building]['unlocked'];
@@ -255,11 +256,11 @@ function init() {
         }
       }
     }
-    for(let save_upgrade in save['upgrades']) {
-      for(let upgrade in upgrades) {
-        if(upgrades[upgrade].id === save_upgrade) {
+    for (let save_upgrade in save['upgrades']) {
+      for (let upgrade in upgrades) {
+        if (upgrades[upgrade].id === save_upgrade) {
           upgrades[upgrade].owned = save['upgrades'][save_upgrade]['owned'];
-          if(upgrades[upgrade].owned) {
+          if (upgrades[upgrade].owned) {
             $("#upgrade-" + upgrades[upgrade].id + "-btn").remove();
             $("#upgrade-" + upgrades[upgrade].id + "-price").remove();
             $("#upgrade-" + upgrades[upgrade].id).removeClass("teal").addClass("green accent-4");
@@ -267,9 +268,9 @@ function init() {
         }
       }
     }
-    money_per_follower = save['money_per_follower'];
-    followers_per_click = save['followers_per_click'];
-    recruiting = save['recruiting'];
+    window.money_per_follower = save['money_per_follower'];
+    window.followers_per_click = save['followers_per_click'];
+    window.recruiting = save['recruiting'];
   }
   window.updateDisplayIntervalID = window.setInterval(update_display, 100);
   window.tickIntervalID = window.setInterval(tick, 100);
