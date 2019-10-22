@@ -3,9 +3,9 @@
 
 # TEAM
 
-    Developer: Jenny Rakete
-    Twitter: @_Jenny_Davis
-    GitHub: /quadcerebrumal
+    Developer:  *           Jenny Rakete
+                  Twitter:  @_Jenny_Davis
+                  GitHub:   /quadcerebrumal
 
 # TECHNOLOGY COLOPHON
 
