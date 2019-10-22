@@ -27,36 +27,42 @@
 
   <!-- Add your site or application content here -->
   <h1 class="header center orange-text">The Prophet</h1>
-  <div class="container">
-    <div id="header" class="card">
-      <div class="card-panel row "> <!-- Contains the stats -->
-        <div class="col s6">
-          <p class="flow-text">Followers: <span class="flow-text" id="follower-stat">0</span></p>
-          <button id="recruit-btn" class="btn-small waves-effect waves-light orange">Recruit</button>
+  <div class="row">
+    <div class="s12 m11 offset-m1">
+      <div id="header" class="card">
+        <div class="card-panel row "> <!-- Contains the stats -->
+          <div class="col s6">
+            <p class="flow-text">Followers: <span class="flow-text" id="follower-stat">0</span></p>
+            <button id="recruit-btn" class="btn-small waves-effect waves-light orange">Recruit</button>
+          </div>
+          <div class="col s6">
+            <p class="flow-text">Money: <span class="flow-text" id="money-stat">0</span></p>
+            <button id="reset-btn" class="btn-small waves-effect waves-light red">Reset</button>
+          </div>
         </div>
-        <div class="col s6">
-          <p class="flow-text">Money: <span class="flow-text" id="money-stat">0</span></p>
-          <button id="reset-btn" class="btn-small waves-effect waves-light red">Reset</button>
+        <div class="row">
+          <div class="col s6"><h5>Upgrades</h5></div>
+          <div class="col s6"><h5>Buildings</h5></div>
         </div>
       </div>
       <div class="row">
-        <div class="col s6"><h5>Upgrades</h5></div>
-        <div class="col s6"><h5>Buildings</h5></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s6">
-        <div id="upgrades-card">
+        <div class="col s6">
+          <div id="upgrades-card">
+          </div>
         </div>
-      </div>
-      <div class="col s6">
-        <div id="buildings-card">
+        <div class="col s6">
+          <div id="buildings-card">
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="centered">
+    <a href="https://www.patreon.com/bePatron?u=16389185" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+  </div>
 
   <!-- Technical fun begins here -->
+  <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
