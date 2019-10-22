@@ -194,7 +194,7 @@ function init() {
     }, () => {return buildings[1].count > 4}),
     new Upgrade("ancient-relic", "Ancient relic", "Increases recruiting by 50%", 500, function () {
       recruiting += recruiting / 2;
-    }, () => {return followers.total > 100}),
+    }, () => {return followers.total > 100 && buildings[1].unlocked}),
     new Upgrade("ceremonies", "Ceremonies", "Increases recruiting by 50%", 1500, function () {
       recruiting += recruiting / 2;
     }, () => {return money.total > 10000}),
