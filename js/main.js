@@ -214,7 +214,6 @@ function init() {
   // Make the reset button reset
   document.getElementById("reset-btn").addEventListener("click", function () {
     document.cookie = "save=;Max-Age=-99999999;";
-    window.location.replace(window.location);
     M.toast({html: "Your game was reset."});
   });
   // Put the buildings into the buildings tab
