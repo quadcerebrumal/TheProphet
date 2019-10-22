@@ -238,7 +238,7 @@ function init() {
   }
   // Read Cookie save if possible
   if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
-    let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+    let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*=\s*([^;]*).*$)|^.*$/, "$1"));
     followers.amount = save['followers'];
     followers.total = save['followers_total'];
     money.amount = save['money'];
