@@ -137,7 +137,9 @@ function save() {
 }
 
 function reset() {
+  document.cookie = "save=;Max-Age=-99999999;";
   init();
+  save();
 }
 
 function init() {
@@ -209,14 +211,14 @@ function init() {
   ];
 
   // Make the recruit button recruit
-  document.getElementById("recruit-btn").addEventListener("click", function () {
+  document.getElementById("recruit-btn").onclick = function () {
     followers.add(followers_per_click * recruiting);
-  });
+  };
   // Make the reset button reset
-  document.getElementById("reset-btn").addEventListener("click", function () {
+  document.getElementById("reset-btn").onclick = function () {
     reset();
     M.toast({html: "Your game was reset."});
-  });
+  };
   // Put the buildings into the buildings tab
   document.getElementById("buildings-card").innerHTML = '';
   for(let building in buildings) {
@@ -269,13 +271,9 @@ function init() {
     followers_per_click = save['followers_per_click'];
     recruiting = save['recruiting'];
   }
-  window.setInterval(() => {
-    tick();
-    update_display();
-  }, 100);
-  window.setInterval(() => {
-    save();
-  }, 5000);
+  window.updateDisplayIntervalID = window.setInterval(update_display, 100);
+  window.tickIntervalID = window.setInterval(tick, 100);
+  window.saveIntervalID = window.setInterval(save, 5000);
 }
 
 init();
