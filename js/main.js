@@ -1,8 +1,3 @@
-let followers_per_click = 1;
-let money_per_follower = 0.01;
-let recruiting = 1;
-
-
 class Wallet {
   constructor() {
     this.amount = 0;
@@ -18,9 +13,6 @@ class Wallet {
     this.amount -= amount;
   }
 }
-
-let money = new Wallet();
-let followers = new Wallet();
 
 class Upgrade {
   constructor(id, name, description, price, effect, shown) {
@@ -78,67 +70,6 @@ class Building {
     }
   }
 }
-
-
-let buildings = [
-  new Building("meeting-place", "Meeting place", "Recruits 1 follower in 10 seconds", 2, function() {
-    followers.add(this.count * 0.01 * recruiting);
-  }, function() {  }, 1.2),
-  new Building("church", "Church", "Recruits 1 follower per second", 100, function() {
-    followers.add(this.count * 0.1 * recruiting);
-  }, function() {  }, 1.2),
-  new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per follower per second", 500, function() {
-    money.add(money_per_follower * followers.amount / 10 * this.count);
-    $("#building-sacrificial-place-production").text(money_per_follower.toFixed(2));
-  }, function() {  }, 1.2)
-];
-
-
-let upgrades = [
-  new Upgrade("unlock-meeting-place", "Unlock Meeting Place", "Unlocks the meeting place", 2, function () {
-    for(let building in buildings) {
-      if(buildings[building].id === "meeting-place") {
-        buildings[building].unlock();
-        break;
-      }
-    }
-  }, () => {return followers.total > 10}),
-  new Upgrade("double-fee-0", "Higher fee", "Increases your followers' fee by 100%", 50, function () {
-    money_per_follower += money_per_follower;
-  }, () => {return money.total > 200}),
-  new Upgrade("unlock-church", "Unlock Church", "Unlocks the Church", 100, function () {
-    for(let building in buildings) {
-      if(buildings[building].id === "church") {
-        buildings[building].unlock();
-        break;
-      }
-    }
-  }, () => {return buildings[0].count > 4}),
-  new Upgrade("unlock-sacrificial-place", "Unlock Sacrificial Place", "Unlocks the Sacrificial Place", 500, function() {
-    for(let building in buildings) {
-      if(buildings[building].id === "sacrificial-place") {
-        buildings[building].unlock();
-        break;
-      }
-    }
-  }, () => {return buildings[1].count > 4}),
-  new Upgrade("ancient-relic", "Ancient relic", "Increases recruiting by 50%", 500, function () {
-    recruiting += recruiting / 2;
-  }, () => {return followers.total > 100}),
-  new Upgrade("ceremonies", "Ceremonies", "Increases recruiting by 50%", 1500, function () {
-    recruiting += recruiting / 2;
-  }, () => {return money.total > 10000}),
-  new Upgrade("sacred-texts", "Sacred Texts", "Increases recruiting by 50%", 3000, function () {
-    recruiting += recruiting / 2;
-  }, () => {return followers.total > 1000 }),
-  new Upgrade("tax-exempt", "Tax-Exempt", "Removes the 30% taxes from your in-flow", 100, function () {
-    money_per_follower = money_per_follower * 1.4285714;
-  }, () => {return followers.total > 10000}),
-  new Upgrade("central-control", "Secret central control", "Decreases followers leaving and increases fee by 200% the cult through blackmail.", 500000, function () {
-    recruiting = recruiting * 1.5;
-    money_per_follower = money_per_follower * 3
-  }, () => {return followers.total > 100000})
-];
 
 
 function update_display() {
@@ -205,7 +136,77 @@ function save() {
   document.cookie = "save=" + save;
 }
 
+function reset() {
+  init();
+}
+
 function init() {
+  // Set variables
+  let followers_per_click = 1;
+  let money_per_follower = 0.01;
+  let recruiting = 1;
+  let money = new Wallet();
+  let followers = new Wallet();
+
+  // Set buildings
+  let buildings = [
+    new Building("meeting-place", "Meeting place", "Recruits 1 follower in 10 seconds", 2, function() {
+      followers.add(this.count * 0.01 * recruiting);
+    }, function() {  }, 1.2),
+    new Building("church", "Church", "Recruits 1 follower per second", 100, function() {
+      followers.add(this.count * 0.1 * recruiting);
+    }, function() {  }, 1.2),
+    new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per follower per second", 500, function() {
+      money.add(money_per_follower * followers.amount / 10 * this.count);
+      $("#building-sacrificial-place-production").text(money_per_follower.toFixed(2));
+    }, function() {  }, 1.2)
+  ];
+  // Set upgrades
+  let upgrades = [
+    new Upgrade("unlock-meeting-place", "Unlock Meeting Place", "Unlocks the meeting place", 2, function () {
+      for(let building in buildings) {
+        if(buildings[building].id === "meeting-place") {
+          buildings[building].unlock();
+          break;
+        }
+      }
+    }, () => {return followers.total > 10}),
+    new Upgrade("double-fee-0", "Higher fee", "Increases your followers' fee by 100%", 50, function () {
+      money_per_follower += money_per_follower;
+    }, () => {return money.total > 200}),
+    new Upgrade("unlock-church", "Unlock Church", "Unlocks the Church", 100, function () {
+      for(let building in buildings) {
+        if(buildings[building].id === "church") {
+          buildings[building].unlock();
+          break;
+        }
+      }
+    }, () => {return buildings[0].count > 4}),
+    new Upgrade("unlock-sacrificial-place", "Unlock Sacrificial Place", "Unlocks the Sacrificial Place", 500, function() {
+      for(let building in buildings) {
+        if(buildings[building].id === "sacrificial-place") {
+          buildings[building].unlock();
+          break;
+        }
+      }
+    }, () => {return buildings[1].count > 4}),
+    new Upgrade("ancient-relic", "Ancient relic", "Increases recruiting by 50%", 500, function () {
+      recruiting += recruiting / 2;
+    }, () => {return followers.total > 100}),
+    new Upgrade("ceremonies", "Ceremonies", "Increases recruiting by 50%", 1500, function () {
+      recruiting += recruiting / 2;
+    }, () => {return money.total > 10000}),
+    new Upgrade("sacred-texts", "Sacred Texts", "Increases recruiting by 50%", 3000, function () {
+      recruiting += recruiting / 2;
+    }, () => {return followers.total > 1000 }),
+    new Upgrade("tax-exempt", "Tax-Exempt", "Removes the 30% taxes from your in-flow", 100, function () {
+      money_per_follower = money_per_follower * 1.4285714;
+    }, () => {return followers.total > 10000}),
+    new Upgrade("central-control", "Secret central control", "Decreases followers leaving and increases fee by 200% the cult through blackmail.", 500000, function () {
+      recruiting = recruiting * 1.5;
+      money_per_follower = money_per_follower * 3
+    }, () => {return followers.total > 100000})
+  ];
 
   // Make the recruit button recruit
   document.getElementById("recruit-btn").addEventListener("click", function () {
@@ -213,7 +214,7 @@ function init() {
   });
   // Make the reset button reset
   document.getElementById("reset-btn").addEventListener("click", function () {
-    document.cookie = "save=;Max-Age=-99999999;";
+    reset();
     M.toast({html: "Your game was reset."});
   });
   // Put the buildings into the buildings tab
