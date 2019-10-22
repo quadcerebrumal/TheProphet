@@ -142,14 +142,14 @@ function reset() {
 
 function init() {
   // Set variables
-  let followers_per_click = 1;
-  let money_per_follower = 0.01;
-  let recruiting = 1;
-  let money = new Wallet();
-  let followers = new Wallet();
+  window.followers_per_click = 1;
+  window.money_per_follower = 0.01;
+  window.recruiting = 1;
+  window.money = new Wallet();
+  window.followers = new Wallet();
 
   // Set buildings
-  let buildings = [
+  window.buildings = [
     new Building("meeting-place", "Meeting place", "Recruits 1 follower in 10 seconds", 2, function() {
       followers.add(this.count * 0.01 * recruiting);
     }, function() {  }, 1.2),
@@ -162,7 +162,7 @@ function init() {
     }, function() {  }, 1.2)
   ];
   // Set upgrades
-  let upgrades = [
+  window.upgrades = [
     new Upgrade("unlock-meeting-place", "Unlock Meeting Place", "Unlocks the meeting place", 2, function () {
       for(let building in buildings) {
         if(buildings[building].id === "meeting-place") {
