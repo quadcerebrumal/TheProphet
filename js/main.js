@@ -146,11 +146,6 @@ function save() {
 
 function reset() {
   document.cookie = "save=;Max-Age=-99999999;";
-  init();
-  save();
-}
-
-function init() {
   // Set variables
   followers_per_click = 1;
   money_per_follower = 0.01;
@@ -218,15 +213,6 @@ function init() {
     }, () => {return followers.total > 100000})
   ];
 
-  // Make the recruit button recruit
-  document.getElementById("recruit-btn").onclick = function () {
-    followers.add(followers_per_click * recruiting);
-  };
-  // Make the reset button reset
-  document.getElementById("reset-btn").onclick = function () {
-    reset();
-    M.toast({html: "Your game was reset."});
-  };
   // Put the buildings into the buildings tab
   document.getElementById("buildings-card").innerHTML = '';
   for(let building in buildings) {
@@ -236,6 +222,7 @@ function init() {
       "<button onclick='buildings[" + building + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
     buildings[building].init();
   }
+
   // Put the upgrades into the upgrades tab
   document.getElementById("upgrades-card").innerHTML = '';
   for(let upgrade in upgrades) {
@@ -244,6 +231,24 @@ function init() {
       upgrades[upgrade].description + "<span id='upgrade-" + upgrades[upgrade].id + "-price'><br>Price: $ " + upgrades[upgrade].price + "</span></span><br>" +
       "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
   }
+  save();
+}
+
+function init() {
+  // Set variables
+  reset();
+
+  // Make the recruit button recruit
+  document.getElementById("recruit-btn").onclick = function () {
+    followers.add(followers_per_click * recruiting);
+  };
+  // Make the reset button reset
+  document.getElementById("reset-btn").onclick = function () {
+    reset();
+    M.toast({html: "Your game was reset."});
+  };
+
+
   // Read Cookie save if possible
   if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
     let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*=\s*([^;]*).*$)|^.*$/, "$1"));
