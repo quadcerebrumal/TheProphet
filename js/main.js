@@ -1,3 +1,11 @@
+let followers_per_click;
+let money_per_follower;
+let recruiting;
+let money;
+let followers;
+let buildings;
+let upgrades;
+
 class Wallet {
   constructor() {
     this.amount = 0;
@@ -144,14 +152,14 @@ function reset() {
 
 function init() {
   // Set variables
-  window.followers_per_click = 1;
-  window.money_per_follower = 0.01;
-  window.recruiting = 1;
-  window.money = new Wallet();
-  window.followers = new Wallet();
+  followers_per_click = 1;
+  money_per_follower = 0.01;
+  recruiting = 1;
+  money = new Wallet();
+  followers = new Wallet();
 
   // Set buildings
-  window.buildings = [
+  buildings = [
     new Building("meeting-place", "Meeting place", "Recruits 1 follower in 10 seconds", 2, function() {
       followers.add(this.count * 0.01 * recruiting);
     }, function() {  }, 1.2),
@@ -164,7 +172,7 @@ function init() {
     }, function() {  }, 1.2)
   ];
   // Set upgrades
-  window.upgrades = [
+  upgrades = [
     new Upgrade("unlock-meeting-place", "Unlock Meeting Place", "Unlocks the meeting place", 2, function () {
       for(let building in buildings) {
         if(buildings[building].id === "meeting-place") {
@@ -237,7 +245,6 @@ function init() {
       "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
   }
   // Read Cookie save if possible
-  let followers_per_click;
   if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
     let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*=\s*([^;]*).*$)|^.*$/, "$1"));
     followers.amount = save['followers'];
