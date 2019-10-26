@@ -216,10 +216,10 @@ function reset() {
   // Put the buildings into the buildings tab
   document.getElementById("buildings-card").innerHTML = '';
   for(let building in buildings) {
-    document.getElementById("buildings-card").innerHTML += "" +
+    document.getElementById("buildings-card").innerHTML =
       "<div id='building-" + buildings[building].id + "' style='padding-bottom: 10px' class='card col s12'><h6>" + buildings[building].name + "</h6><span>" +
       buildings[building].description + "<br/>Price: $ <span id='building-" + buildings[building].id + "-price'>" + buildings[building].price.toFixed(2) + "</span><br/>Amount: <span id='building-"+buildings[building].id+"-amount'>0</span></span><br>" +
-      "<button onclick='buildings[" + building + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
+      "<button onclick='buildings[" + building + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>" + document.getElementById("buildings-card").innerHTML;
     buildings[building].init();
   }
 
