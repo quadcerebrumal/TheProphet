@@ -141,11 +141,10 @@ function save() {
     'followers_per_click': followers_per_click,
     'recruiting': recruiting,
   });
-  document.cookie = "save=" + save;
+  window.localStorage.setItem('save', save);
 }
 
 function reset() {
-  document.cookie = "save=;Max-Age=-99999999;";
   // Set variables
   followers_per_click = 1;
   money_per_follower = 0.01;
@@ -226,13 +225,13 @@ function reset() {
   // Put the upgrades into the upgrades tab
   document.getElementById("upgrades-card").innerHTML = '';
   for(let upgrade in upgrades) {
-    document.getElementById("upgrades-card").innerHTML += "" +
+    document.getElementById("upgrades-card").innerHTML = "" +
       "<div style='padding-bottom: 10px' class='card col s12 red' id='upgrade-"+upgrades[upgrade].id+"'><h6>" + upgrades[upgrade].name + "</h6><span>" +
       upgrades[upgrade].description + "<span id='upgrade-" + upgrades[upgrade].id + "-price'><br>Price: $ " + upgrades[upgrade].price + "</span></span><br>" +
-      "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
+      "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>" + document.getElementById("upgrades-card").innerHTML;
   }
-  save();
 }
+
 
 function init() {
   // Set variables
@@ -249,9 +248,9 @@ function init() {
   };
 
 
-  // Read Cookie save if possible
-  if (document.cookie.split(';').filter((item) => item.trim().startsWith('save=')).length) {
-    let save = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)save\s*=\s*([^;]*).*$)|^.*$/, "$1"));
+  // Read localStorage save if possible
+  if(window.localStorage.getItem("save") !== null) {
+    let save = JSON.parse(window.localStorage.getItem("save"));
     followers.amount = save['followers'];
     followers.total = save['followers_total'];
     money.amount = save['money'];
