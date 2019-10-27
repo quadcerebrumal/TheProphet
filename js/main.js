@@ -234,6 +234,18 @@ function reset() {
 
 
 function init() {
+  // Update information
+  $.ajax({
+    'async': true,
+    'global': false,
+    'url': "/notice.json",
+    'dataType': "json",
+    'success': function (data) {
+      console.log("Running version " + data['version']['string'] + " ( " + data['version']['float'].toString() + " )");
+      $("#version-notice").text(data['version']['string']);
+    }
+  });
+
   // Set variables
   reset();
 
