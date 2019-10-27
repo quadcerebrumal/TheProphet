@@ -17,6 +17,7 @@
     * All the people who help either by donating or by submitting ideas, code, etc.
     * Patrons:
       * Markus Radonic (Dödelknödel)
+      * Matthias Preiß
     * People at GameDuell:
       * Matti Richoux
       * Alison Holland
