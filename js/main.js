@@ -238,7 +238,7 @@ function init() {
   $.ajax({
     'async': true,
     'global': false,
-    'url': "/notice.json",
+    'url': "notice.json",
     'dataType': "json",
     'success': function (data) {
       console.log("Running version " + data['version']['string'] + " ( " + data['version']['float'].toString() + " )");
