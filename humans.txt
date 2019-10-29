@@ -19,5 +19,5 @@
       * Dödelknödel
       * Matthias Preiß
     * People at GameDuell:
-      * Matti Richoux
-      * Alison Holland
+      * Matti Richoux (UX-Design)
+      * Alison Holland (UX)
