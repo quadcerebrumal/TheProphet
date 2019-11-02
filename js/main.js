@@ -118,10 +118,10 @@ function update_display() {
 
 function tick() {
   money.add(followers.amount * money_per_follower * 0.1);
-  money_per_second += followers.amount * money_per_follower;
   for (let building in buildings) {
     buildings[building].execute();
   }
+  money_per_second += followers.amount * money_per_follower;
 }
 
 function save() {
