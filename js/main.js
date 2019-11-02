@@ -37,9 +37,8 @@ class Upgrade {
       money.remove(this.price);
       this.owned = true;
       this.effect();
-      $("#upgrade-"+this.id+"-btn").remove();
-      $("#upgrade-"+this.id+"-price").remove();
-      $("#upgrade-"+this.id).removeClass("teal").addClass("green accent-4");
+      $("#"+this.id+"-price-display span").text("PURCHASED");
+      $("#"+this.id+"-price-display").removeClass('affordable').removeClass('expensive').addClass('purchased').removeAttr('onclick');
     } else {
       M.toast({html: "You need more money for this action."});
     }
@@ -84,25 +83,30 @@ function update_display() {
   $("#follower-stat").text(followers.amount.toFixed(0));
   $("#money-stat").text(money.amount.toFixed(2));
   for(let building in buildings) {
-    $("#building-" + buildings[building].id + "-price").text(buildings[building].price.toFixed(2));
-    $("#building-" + buildings[building].id + "-amount").text(buildings[building].count);
+    $("#" + buildings[building].id + "-price").text(buildings[building].price.toFixed(2));
+    $("#" + buildings[building].id + "-amount").text(buildings[building].count);
     if (buildings[building].unlocked) {
-      $("#building-"+buildings[building].id).show();
+      $("#"+buildings[building].id + "-building").show();
+      if (buildings[building].price <= money.amount) {
+        $("#"+buildings[building].id + "-price-display").removeClass('expensive').addClass('affordable');
+      } else {
+        $("#"+buildings[building].id + "-price-display").removeClass('affordable').addClass('expensive');
+      }
     } else {
-      $("#building-"+buildings[building].id).hide();
+      $("#"+buildings[building].id + "-building").hide();
     }
   }
   for(let upgrade in upgrades) {
     if(upgrades[upgrade].owned === false) {
       if (upgrades[upgrade].shown()) {
-        $("#upgrade-" + upgrades[upgrade].id).show();
+        $("#" + upgrades[upgrade].id + "-upgrade").show();
         if (upgrades[upgrade].price <= money.amount) {
-          $("#upgrade-" + upgrades[upgrade].id).removeClass("red").addClass("teal");
+          $("#" + upgrades[upgrade].id + "-price-display").removeClass("expensive").addClass("affordable");
         } else {
-          $("#upgrade-" + upgrades[upgrade].id).removeClass("teal").addClass("red");
+          $("#" + upgrades[upgrade].id + "-price-display").removeClass("affordable").addClass("expensive");
         }
       } else {
-        $("#upgrade-" + upgrades[upgrade].id).hide();
+        $("#" + upgrades[upgrade].id + "-upgrade").hide();
       }
     }
   }
@@ -216,9 +220,19 @@ function reset() {
   document.getElementById("buildings-card").innerHTML = '';
   for(let building in buildings) {
     document.getElementById("buildings-card").innerHTML += "" +
-      "<div id='building-" + buildings[building].id + "' style='padding-bottom: 10px' class='card col s12'><h6>" + buildings[building].name + "</h6><span>" +
-      buildings[building].description + "<br/>Price: $ <span id='building-" + buildings[building].id + "-price'>" + buildings[building].price.toFixed(2) + "</span><br/>Amount: <span id='building-"+buildings[building].id+"-amount'>0</span></span><br>" +
-      "<button onclick='buildings[" + building + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>";
+      "<div id='" + buildings[building].id + "-building' class='block-container center-align'>" +
+      "<div class='block-title'>" +
+      "<span>" + buildings[building].name + "<img class='icon right' src='img/icons/house.svg' alt></span>" +
+      "</div>" +
+      "<div class='block-content'>" +
+      "<span>" + buildings[building].description + "</span><br>" +
+      "<span>You have: <span id='" + buildings[building].id + "-amount'></span></span>" +
+      "<div onclick='buildings["+building+"].buy()' id='" + buildings[building].id + "-price-display' class='price'>" +
+      "<span>$ <span id='" + buildings[building].id + "-price'>" + buildings[building].price + "</span></span>" +
+      "</div>" +
+      "</div>" +
+      "</div>";
+
     buildings[building].init();
   }
 
@@ -226,9 +240,18 @@ function reset() {
   document.getElementById("upgrades-card").innerHTML = '';
   for(let upgrade in upgrades) {
     document.getElementById("upgrades-card").innerHTML = "" +
-      "<div style='padding-bottom: 10px' class='card col s12 red' id='upgrade-"+upgrades[upgrade].id+"'><h6>" + upgrades[upgrade].name + "</h6><span>" +
-      upgrades[upgrade].description + "<span id='upgrade-" + upgrades[upgrade].id + "-price'><br>Price: $ " + upgrades[upgrade].price + "</span></span><br>" +
-      "<button id='upgrade-" + upgrades[upgrade].id + "-btn' onclick='upgrades[" + upgrade + "].buy()' class='btn-flat orange waves-effect'>Buy</button></div>" + document.getElementById("upgrades-card").innerHTML;
+      "<div id='" + upgrades[upgrade].id + "-upgrade' class='block-container center-align'>" +
+      "<div class='block-title'>" +
+      "<span>" + upgrades[upgrade].name + "<img class='icon right' src='img/icons/surface1.svg' alt></span>" +
+      "</div>" +
+      "<div class='block-content'>" +
+      "<span>" + upgrades[upgrade].description + "</span>" +
+      "<div onclick='upgrades["+upgrade+"].buy()' id='" + upgrades[upgrade].id + "-price-display' class='price'>" +
+      "<span>$ " + upgrades[upgrade].price + "</span>" +
+      "</div>" +
+      "</div>" +
+      "</div>"
+      + document.getElementById("upgrades-card").innerHTML;
   }
 }
 
@@ -244,6 +267,12 @@ function init() {
       console.log("Running version " + data['version']['string'] + " ( " + data['version']['float'].toString() + " )");
       $("#version-notice").text(data['version']['string']);
     }
+  });
+
+  // Add plugin to sidebar
+  document.addEventListener('DOMContentLoaded', function() {
+    const elems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(elems, {});
   });
 
   // Set variables
@@ -284,9 +313,8 @@ function init() {
         if (upgrades[upgrade].id === save_upgrade) {
           upgrades[upgrade].owned = save['upgrades'][save_upgrade]['owned'];
           if (upgrades[upgrade].owned) {
-            $("#upgrade-" + upgrades[upgrade].id + "-btn").remove();
-            $("#upgrade-" + upgrades[upgrade].id + "-price").remove();
-            $("#upgrade-" + upgrades[upgrade].id).removeClass("teal").addClass("green accent-4");
+            $("#"+upgrades[upgrade].id+"-price-display span").text("PURCHASED");
+            $("#"+upgrades[upgrade].id+"-price-display").removeClass('affordable').removeClass('expensive').addClass('purchased').removeAttr('onclick');
           }
         }
       }

@@ -10460,7 +10460,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
   var _defaults = {
     duration: 200, // ms
-    dist: -100, // zoom scale TODO: make this more intuitive as an option
+    dist: -100, // zoom scale
     shift: 0, // spacing for center image
     padding: 0, // Padding between non center items
     numVisible: 5, // Number of visible items in carousel
@@ -12311,7 +12311,7 @@ $jscomp.polyfill = function (e, r, p, m) {
       key: "_showRangeBubble",
       value: function _showRangeBubble() {
         var paddingLeft = parseInt($(this.thumb).parent().css('padding-left'));
-        var marginLeft = -7 + paddingLeft + 'px'; // TODO: fix magic number?
+        var marginLeft = -7 + paddingLeft + 'px';
         anim.remove(this.thumb);
         anim({
           targets: this.thumb,

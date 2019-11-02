@@ -12,6 +12,9 @@
     CSS3, HTML5, JavaScript
     Apache Server Configs, jQuery, Modernizr, Materialize, Normalize.css
 
+# EXTERNAL CREDITS
+Icons made by Freepik from www.flaticon.com
+
 # THANKS
 
     * All the people who help either by donating or by submitting ideas, code, etc.
@@ -19,5 +22,5 @@
       * Dödelknödel
       * Matthias Preiß
     * People at GameDuell:
-      * Matti Richoux
-      * Alison Holland
+      * Matti Richoux (UX-Design)
+      * Alison Holland (UX)

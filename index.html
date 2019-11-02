@@ -11,10 +11,10 @@
   <link rel="manifest" href="site.webmanifest"/>
   <link rel="apple-touch-icon" href="icon.png"/>
 
+  <link href="https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/normalize.css"/>
-  <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
-
+  <link rel="stylesheet" href="css/main.css"/>
 
   <meta name="theme-color" content="#fafafa">
 </head>
@@ -24,51 +24,87 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
-  <!-- Add your site or application content here -->
-  <span>v<span id="version-notice"></span></span>
+  <!-- HAMBURGER -->
+  <nav>
+    <div class="nav-wrapper white">
+      <a href="#" class="brand-logo">The Prophet</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons grey-text">menu</i></a>
+    </div>
+  </nav>
+  <div class="sidenav center-align" id="mobile-demo">
+    <ul>
+      <li><a id="patreon-btn" target="_blank" href="https://www.patreon.com/bePatron?u=16389185" class="btn white-text">BECOME A PATRON</a></li>
+      <li><button id="reset-btn" class="btn waves-effect waves-light white-text">RESET GAME</button></li>
+      <li><a href="humans.txt">Credits</a></li>
+      <li><span>v.<span id="version-notice"></span></span></li>
+    </ul>
+  </div>
+  <!-- /HAMBURGER -->
 
-  <h1 class="header center orange-text">The Prophet</h1>
+  <!-- STATS -->
+  <div id="header" class="handle center-align">
+    <span class="stat">Treasury: $ <span id="money-stat">2500</span></span><br>
+    <span class="sub-stat">Per second: $ <span id="mps-stat">5.35</span></span>
+  </div>
+  <div class="center-align">
+    <img class="followers-icon" src="img/icons/teamwork.svg" alt=""><br>
+    <span class="stat">Followers: <span id="follower-stat">50</span></span>
+  </div>
+  <!-- /STATS -->
+
+  <!-- SHOP -->
+  <div class="handle center-align">
+    <span id="shop-header">SHOP</span>
+  </div>
+
   <div class="row">
-    <div class="col s12 m10 offset-m1">
-      <div id="header">
-        <div class="card-panel row"> <!-- Contains the stats -->
-          <div class="col s6">
-            <p class="flow-text">Followers: <span class="flow-text" id="follower-stat"></span></p>
+    <div class="col s6">
+      <div id="upgrades-card">
+        <div class="block-container center-align">
+          <div class="block-title">
+            <span>SACRED TEXTS <img class="icon right" src="img/icons/surface1.svg" alt=""></span>
           </div>
-          <div class="col s6">
-            <p class="flow-text">Money: <span class="flow-text" id="money-stat"></span></p>
-          </div>
-          <div class="col s12">
-            <button id="recruit-btn" class="btn waves-effect waves-light orange">Recruit</button>
+          <div class="block-content">
+            <span>Increases <img class="icon" src="img/icons/teamwork.svg" alt="follower"> growth rate by 50%</span>
+            <div class="price expensive"><span>$ <span id="sacred-texts-price">4000</span></span></div>
           </div>
         </div>
-        <div class="row">
-          <div class="col s6 m5 card"><h5>Upgrades</h5></div>
-          <div class="col s6 m5 offset-m2 card"><h5>Buildings</h5></div>
+        <div class="block-container center-align">
+          <div class="block-title">
+            <span>Ceremonies <img class="icon right" src="img/icons/surface1.svg" alt=""></span>
+          </div>
+          <div class="block-content">
+            <span>Increases <img class="icon" src="img/icons/teamwork.svg" alt="follower"> growth rate by 50%</span>
+            <div class="price purchased"><span id="ceremonies-price">PURCHASED</span></div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col s6">
-          <div id="upgrades-card">
+    </div>
+    <div class="col s6">
+      <div id="buildings-card">
+        <div class="block-container center-align">
+          <div class="block-title">
+            <span>MEETING PLACE<img class="icon right" src="img/icons/house.svg" alt=""></span>
           </div>
-        </div>
-        <div class="col s6">
-          <div id="buildings-card">
+          <div class="block-content">
+            <span>Recruits 1 <img class="icon" src="img/icons/teamwork.svg" alt="follower"> every 10 seconds</span><br>
+            <span>You have: <span id="meeting-place-amount">5</span></span>
+            <div class="price affordable"><span>$ <span id="meeting-place-price">90</span></span></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row center">
-    <div class="col s12">
-      <button id="reset-btn" class="btn-flat waves-effect waves-light white-text red">Reset (Use with CAUTION!)</button>
-    </div>
-    <br>
-    <br>
-    <div class="col s12">
-      <a target="_blank" href="https://www.patreon.com/bePatron?u=16389185" class="btn-flat white-text patreon-red">Become a Patron</a>
-    </div>
+  <!-- /SHOP -->
+
+  <!-- Recruit button -->
+  <div id="recruit-btn-wrapper" class="center-align">
+    <button id="recruit-btn" class="btn waves-effect waves-ripple grey darken-3"><img id="recruit-icon" src="img/icons/praying-hands.svg" alt="Recruit"></button>
   </div>
+
+
+  <!-- Credits -->
+  <div class="hidden">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
   <!-- Technical fun begins here -->
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>

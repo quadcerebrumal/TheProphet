@@ -264,11 +264,123 @@ textarea {
   }
 }
 
+nav {
+  box-shadow: none;
+}
+nav .brand-logo {
+  font-family: Bitter, serif;
+  color: #717171;
+}
+.sidenav li {
+  line-height: inherit;
+}
+
 #header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 7;
 }
-.patreon-red {
-  background-color: #E85B46 !important;
+
+#shop-header {
+  font-size: 1.2em;
+  font-weight: 900;
+}
+
+#recruit-btn-wrapper {
+  background-color: #FFFFFF;
+  padding: 10px 0 0 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 7;
+  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+}
+#recruit-btn {
+  height: 50px;
+  width: 70%;
+}
+#recruit-icon {
+  height: 40px;
+}
+
+span {
+  font-family: Roboto, sans-serif;
+  color: #717171;
+}
+
+#mobile-demo {
+  display: flex;
+  flex-direction: column;
+}
+#mobile-demo ul {
+  margin-top: auto;
+}
+#mobile-demo span {
+  font-family: Bitter, serif;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+#reset-btn {
+  background-color: #303030 !important;
+  line-height: 20px;
+  font-weight: 900;
+  width: 85%;
+  height: 50px;
+  margin-bottom: 50px;
+}
+#patreon-btn {
+  background-color: #5b8f4f !important;
+  display: inline-block !important;
+  font-weight: 900;
+  width: 85%;
+  height: 50px;
+}
+
+.stat {
+  font-size: 1.5em;
+}
+.sub-stat {
+  font-size: 1.2em;
+}
+
+.followers-icon {
+  height: 2em;
+}
+
+.handle {
+  border-top: #d2d2d2;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  background-color: #f6f6f6;
+  margin: 20px 0;
+  padding: 5px 0;
+}
+
+.block-container {
+  border: 1px solid #d2d2d2;
+  margin-bottom: 10px;
+  font-weight: 900;
+}
+.block-title {
+  border-bottom: 1px solid #d2d2d2;
+  background-color: #ececec;
+  padding: 2px 5px;
+}
+.block-content {
+  padding: 5px;
+}
+.price {
+  border-radius: 5px;
+}
+.price span {
+  color: #fff;
+}
+.purchased {
+  background-color: #486935;
+}
+.expensive {
+  background-color: #7f7f7f;
+}
+.affordable {
+  background-color: #159aea;
 }
