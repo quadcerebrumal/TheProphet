@@ -3,7 +3,7 @@
 
 # TEAM
 
-    Developer:  *           Jenny Rakete
+    Developer:  * Jenny Rakete
                   Twitter:  @_Jenny_Davis
                   GitHub:   /quadcerebrumal
 
