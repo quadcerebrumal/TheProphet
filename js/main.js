@@ -245,7 +245,7 @@ function reset() {
       "<span>" + upgrades[upgrade].name + "<img class='icon right' src='img/icons/surface1.svg' alt></span>" +
       "</div>" +
       "<div class='block-content'>" +
-      "<span>" + upgrades[upgrade].description + "</span>" +
+      "<span>" + upgrades[upgrade].description + "</span><br><br>" +
       "<div onclick='upgrades["+upgrade+"].buy()' id='" + upgrades[upgrade].id + "-price-display' class='price'>" +
       "<span>$ " + upgrades[upgrade].price + "</span>" +
       "</div>" +
