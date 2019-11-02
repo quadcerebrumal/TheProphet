@@ -383,4 +383,5 @@ span {
 }
 .affordable {
   background-color: #159aea;
+  cursor: pointer;
 }
