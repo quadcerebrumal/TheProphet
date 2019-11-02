@@ -264,11 +264,71 @@ textarea {
   }
 }
 
+nav {
+  box-shadow: none;
+}
+nav .brand-logo {
+  font-family: Bitter, serif;
+  color: #717171;
+}
+
 #header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 7;
 }
-.patreon-red {
-  background-color: #E85B46 !important;
+
+#shop-header {
+  font-size: 2em;
+}
+
+#recruit-btn {
+  height: 50px;
+  width: 70%;
+}
+#recruit-icon {
+  height: 40px;
+}
+
+#reset-btn {
+  background-color: #303030 !important;
+  width: 80%;
+  height: 5%;
+}
+
+#patreon-btn {
+  background-color: #5b8f4f !important;
+  width: 80%;
+  height: 30px;
+}
+
+span {
+  font-family: Roboto, sans-serif;
+}
+
+#mobile-demo {
+  display: flex;
+  flex-direction: column;
+}
+#mobile-demo ul {
+  margin-top: auto;
+}
+#mobile-demo span {
+  font-family: Bitter, serif;
+}
+
+.stat {
+  font-size: 1.5em;
+}
+.sub-stat {
+  font-size: 1em;
+}
+
+.icon {
+  height: 4em;
+}
+
+.handle {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f6f6f6;
 }
