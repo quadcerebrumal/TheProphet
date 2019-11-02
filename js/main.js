@@ -1,5 +1,6 @@
 let followers_per_click;
 let money_per_follower;
+let money_per_second;
 let recruiting;
 let money;
 let followers;
@@ -57,6 +58,7 @@ class Building {
     this.init = init;
     this.count = 0;
     this.unlocked = false;
+    this.mps = 0;
   }
 
   execute() {
@@ -82,6 +84,8 @@ class Building {
 function update_display() {
   $("#follower-stat").text(followers.amount.toFixed(0));
   $("#money-stat").text(money.amount.toFixed(2));
+  $("#mps-stat").text(money_per_second.toFixed(2));
+  money_per_second = 0;
   for(let building in buildings) {
     $("#" + buildings[building].id + "-price").text(buildings[building].price.toFixed(2));
     $("#" + buildings[building].id + "-amount").text(buildings[building].count);
@@ -114,6 +118,7 @@ function update_display() {
 
 function tick() {
   money.add(followers.amount * money_per_follower * 0.1);
+  money_per_second += followers.amount * money_per_follower;
   for (let building in buildings) {
     buildings[building].execute();
   }
@@ -152,6 +157,7 @@ function reset() {
   // Set variables
   followers_per_click = 1;
   money_per_follower = 0.01;
+  money_per_second = 0;
   recruiting = 1;
   money = new Wallet();
   followers = new Wallet();
@@ -166,6 +172,7 @@ function reset() {
     }, function() {  }, 1.2),
     new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per follower per second", 500, function() {
       money.add(money_per_follower * followers.amount / 10 * this.count);
+      money_per_second += money_per_follower * followers.amount * this.count;
       $("#building-sacrificial-place-production").text(money_per_follower.toFixed(2));
     }, function() {  }, 1.2)
   ];
