@@ -271,8 +271,8 @@ function init() {
 
   // Add plugin to sidebar
   document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, {});
+    const elems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(elems, {});
   });
 
   // Set variables
