@@ -271,6 +271,9 @@ nav .brand-logo {
   font-family: Bitter, serif;
   color: #717171;
 }
+.sidenav li {
+  line-height: inherit;
+}
 
 #header {
   position: sticky;
@@ -290,20 +293,9 @@ nav .brand-logo {
   height: 40px;
 }
 
-#reset-btn {
-  background-color: #303030 !important;
-  width: 80%;
-  height: 5%;
-}
-
-#patreon-btn {
-  background-color: #5b8f4f !important;
-  width: 80%;
-  height: 30px;
-}
-
 span {
   font-family: Roboto, sans-serif;
+  color: #717171;
 }
 
 #mobile-demo {
@@ -315,20 +307,42 @@ span {
 }
 #mobile-demo span {
   font-family: Bitter, serif;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+#reset-btn {
+  background-color: #303030 !important;
+  line-height: 20px;
+  font-weight: 900;
+  width: 85%;
+  height: 50px;
+  margin-bottom: 50px;
+}
+#patreon-btn {
+  background-color: #5b8f4f !important;
+  display: inline-block !important;
+  font-weight: 900;
+  width: 85%;
+  height: 50px;
 }
 
 .stat {
   font-size: 1.5em;
 }
 .sub-stat {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 .icon {
-  height: 4em;
+  height: 2em;
 }
 
 .handle {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  border-top: #d2d2d2;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-shadow: 0 2px 2px  0   rgba(0, 0, 0, 0.14);
   background-color: #f6f6f6;
+  margin: 20px 0;
+  padding: 5px 0;
 }
