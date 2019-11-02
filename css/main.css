@@ -282,9 +282,18 @@ nav .brand-logo {
 }
 
 #shop-header {
-  font-size: 2em;
+  font-size: 1.2em;
+  font-weight: 900;
 }
 
+#recruit-btn-wrapper {
+  background-color: #FFFFFF;
+  padding: 10px 0 0 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 7;
+  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+}
 #recruit-btn {
   height: 50px;
   width: 70%;
@@ -333,7 +342,7 @@ span {
   font-size: 1.2em;
 }
 
-.icon {
+.followers-icon {
   height: 2em;
 }
 
@@ -341,8 +350,37 @@ span {
   border-top: #d2d2d2;
   border-top-style: solid;
   border-top-width: 1px;
-  box-shadow: 0 2px 2px  0   rgba(0, 0, 0, 0.14);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
   background-color: #f6f6f6;
   margin: 20px 0;
   padding: 5px 0;
+}
+
+.block-container {
+  border: 1px solid #d2d2d2;
+  margin-bottom: 10px;
+  font-weight: 900;
+}
+.block-title {
+  border-bottom: 1px solid #d2d2d2;
+  background-color: #ececec;
+  padding: 2px 5px;
+}
+.block-content {
+  padding: 5px;
+}
+.price {
+  border-radius: 5px;
+}
+.price span {
+  color: #fff;
+}
+.purchased {
+  background-color: #486935;
+}
+.expensive {
+  background-color: #7f7f7f;
+}
+.affordable {
+  background-color: #159aea;
 }
