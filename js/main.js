@@ -230,7 +230,7 @@ function reset() {
     new Upgrade("sacred-texts", "Sacred Texts", "Increases <img src='img/icons/teamwork.svg' alt='follower(s)'> growth-rate by 50%", 3000, function () {
       recruiting += recruiting / 2;
     }, () => {return followers.total > 1000 }),
-    new Upgrade("tax-exempt", "Tax-Exempt", "Removes the 30% taxes from your in-flow", 100, function () {
+    new Upgrade("tax-exempt", "Tax-Exempt", "Removes the 30% taxes from your in-flow because you are an official religion for a small maintenance-fee of just $100", 100, function () {
       money_per_follower = money_per_follower * 1.4285714;
     }, () => {return followers.total > 10000}),
     new Upgrade("central-control", "Secret central control", "Better indoctrination (20% higher <img src='img/icons/teamwork.svg' alt='follower(s)'> growth) and triples fee through blackmail.", 5000000000, function () {
