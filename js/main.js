@@ -3,8 +3,8 @@ let money_per_follower;
 let money_per_second;
 let followers_per_second;
 let recruiting;
-let money;
 let followers;
+let money;
 let buildings;
 let upgrades;
 
