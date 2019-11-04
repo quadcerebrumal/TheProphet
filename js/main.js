@@ -227,7 +227,7 @@ function reset() {
     new Upgrade("tax-exempt", "Tax-Exempt", "Removes the 30% taxes from your in-flow", 100, function () {
       money_per_follower = money_per_follower * 1.4285714;
     }, () => {return followers.total > 10000}),
-    new Upgrade("central-control", "Secret central control", "Decreases <img src='img/icons/teamwork.svg' alt='follower(s)'> leaving and triples fee through blackmail.", 5000000000, function () {
+    new Upgrade("central-control", "Secret central control", "Better indoctrination (20% higher <img src='img/icons/teamwork.svg' alt='follower(s)'> growth) and triples fee through blackmail.", 5000000000, function () {
       recruiting = recruiting * 1.2;
       money_per_follower = money_per_follower * 3
     }, () => {return followers.total > 100000})
