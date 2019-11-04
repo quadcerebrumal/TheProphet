@@ -167,20 +167,23 @@ function reset() {
 
   // Set buildings
   buildings = [
-    new Building("meeting-place", "Meeting place", "Recruits <span id='meeting-place-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> in 10 seconds", 2, function() {
+    new Building("meeting-place", "Meeting place", "Recruits <span id='meeting-place-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> in 10 seconds<br>Producing: <span id='meeting-place-production'>0</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second", 2, function() {
       followers.add(this.count * 0.01 * recruiting);
       followers_per_second += this.count * 0.1 * recruiting;
       $("#meeting-place-desc").text(recruiting.toFixed(0));
+      $("#meeting-place-production").text((this.count * 0.1 * recruiting).toFixed(2));
     }, function() {  }, 1.2),
-    new Building("church", "Church", "Recruits <span id='church-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> per second", 100, function() {
+    new Building("church", "Church", "Recruits <span id='church-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second<br>Producing: <span id='church-production'>0</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second", 100, function() {
       followers.add(this.count * 0.1 * recruiting);
       followers_per_second += this.count * 1 * recruiting;
       $("#church-desc").text(recruiting.toFixed(0));
+      $("#church-production").text((this.count * 1 * recruiting).toFixed());
     }, function() {  }, 1.2),
-    new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per <img src='img/icons/teamwork.svg' alt='follower'> per second", 500, function() {
+    new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per <img src='img/icons/teamwork.svg' alt='follower'> / second<br>Producing: $ <span id='sacrificial-place-production'>0</span> / second", 500, function() {
       money.add(money_per_follower * followers.amount / 10 * this.count);
       money_per_second += money_per_follower * followers.amount * this.count;
       $("#building-sacrificial-place-production").text(money_per_follower.toFixed(2));
+      $("#sacrificial-place-production").text((money_per_follower * followers.amount * this.count).toFixed(2));
     }, function() {  }, 1.2)
   ];
   // Set upgrades
