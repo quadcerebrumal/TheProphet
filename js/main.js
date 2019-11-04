@@ -85,7 +85,7 @@ function formatNum(number, fractionDigits) {
 }
 
 function update_display() {
-  $("#follower-stat").text(formatNum(followers.amount, 2));
+  $("#follower-stat").text(formatNum(followers.amount, 0));
   $("#money-stat").text(formatNum(money.amount, 2));
   $("#mps-stat").text(formatNum(money_per_second, 2));
   $("#mpf-stat").text(formatNum(money_per_follower, 2));
