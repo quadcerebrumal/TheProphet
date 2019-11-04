@@ -1,6 +1,7 @@
 let followers_per_click;
 let money_per_follower;
 let money_per_second;
+let followers_per_second;
 let recruiting;
 let money;
 let followers;
@@ -85,7 +86,9 @@ function update_display() {
   $("#follower-stat").text(followers.amount.toFixed(0));
   $("#money-stat").text(money.amount.toFixed(2));
   $("#mps-stat").text(money_per_second.toFixed(2));
+  $("#fps-stat").text(followers_per_second.toFixed(2));
   money_per_second = 0;
+  followers_per_second = 0;
   for(let building in buildings) {
     $("#" + buildings[building].id + "-price").text(buildings[building].price.toFixed(2));
     $("#" + buildings[building].id + "-amount").text(buildings[building].count);
@@ -158,6 +161,7 @@ function reset() {
   followers_per_click = 1;
   money_per_follower = 0.01;
   money_per_second = 0;
+  followers_per_second = 0;
   recruiting = 1;
   money = new Wallet();
   followers = new Wallet();
@@ -166,10 +170,12 @@ function reset() {
   buildings = [
     new Building("meeting-place", "Meeting place", "Recruits <span id='meeting-place-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> in 10 seconds", 2, function() {
       followers.add(this.count * 0.01 * recruiting);
+      followers_per_second += this.count * 0.01 * recruiting;
       $("#meeting-place-desc").text(recruiting.toFixed(0));
     }, function() {  }, 1.2),
     new Building("church", "Church", "Recruits <span id='church-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> per second", 100, function() {
       followers.add(this.count * 0.1 * recruiting);
+      followers_per_second += this.count * 0.1 * recruiting;
       $("#church-desc").text(recruiting.toFixed(0));
     }, function() {  }, 1.2),
     new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per <img src='img/icons/teamwork.svg' alt='follower'> per second", 500, function() {
