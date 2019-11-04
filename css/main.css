@@ -401,7 +401,7 @@ span {
   border-radius: 5px;
 }
 .price span {
-  color: rgb(var(--fgColor));
+  color: rgb(var(--bgColor));
 }
 .purchased {
   background-color: rgb(72, 105, 53);
