@@ -326,7 +326,7 @@ nav {
   margin: 10px 0;
   height: 50px;
   width: 70%;
-  background-color: rgb(var(--bgColor));
+  background-color: rgb(var(--fgColor));
 }
 #recruit-icon {
   height: 40px;
