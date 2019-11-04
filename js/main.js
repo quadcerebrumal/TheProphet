@@ -85,6 +85,7 @@ function update_display() {
   $("#follower-stat").text(followers.amount.toFixed(0));
   $("#money-stat").text(money.amount.toFixed(2));
   $("#mps-stat").text(money_per_second.toFixed(2));
+  $("#mpf-stat").text(money_per_follower.toFixed(2));
   $("#fps-stat").text(followers_per_second.toFixed(2));
   money_per_second = 0;
   followers_per_second = 0;
