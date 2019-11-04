@@ -230,7 +230,7 @@ function reset() {
     new Upgrade("central-control", "Secret central control", "Better indoctrination (20% higher <img src='img/icons/teamwork.svg' alt='follower(s)'> growth) and triples fee through blackmail.", 5000000000, function () {
       recruiting = recruiting * 1.2;
       money_per_follower = money_per_follower * 3
-    }, () => {return followers.total > 100000})
+    }, () => {return upgrades[7].owned})
   ];
 
   // Put the buildings into the buildings tab
