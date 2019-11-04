@@ -170,12 +170,12 @@ function reset() {
   buildings = [
     new Building("meeting-place", "Meeting place", "Recruits <span id='meeting-place-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> in 10 seconds", 2, function() {
       followers.add(this.count * 0.01 * recruiting);
-      followers_per_second += this.count * 0.01 * recruiting;
+      followers_per_second += this.count * 0.1 * recruiting;
       $("#meeting-place-desc").text(recruiting.toFixed(0));
     }, function() {  }, 1.2),
     new Building("church", "Church", "Recruits <span id='church-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> per second", 100, function() {
       followers.add(this.count * 0.1 * recruiting);
-      followers_per_second += this.count * 0.1 * recruiting;
+      followers_per_second += this.count * 1 * recruiting;
       $("#church-desc").text(recruiting.toFixed(0));
     }, function() {  }, 1.2),
     new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per <img src='img/icons/teamwork.svg' alt='follower'> per second", 500, function() {
