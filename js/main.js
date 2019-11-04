@@ -80,18 +80,21 @@ class Building {
   }
 }
 
+function formatNum(number, fractionDigits) {
+  return parseFloat(number.toFixed(fractionDigits)).toLocaleString();
+}
 
 function update_display() {
-  $("#follower-stat").text(followers.amount.toFixed(0));
-  $("#money-stat").text(money.amount.toFixed(2));
-  $("#mps-stat").text(money_per_second.toFixed(2));
-  $("#mpf-stat").text(money_per_follower.toFixed(2));
-  $("#fps-stat").text(followers_per_second.toFixed(2));
+  $("#follower-stat").text(formatNum(followers.amount, 2));
+  $("#money-stat").text(formatNum(money.amount, 2));
+  $("#mps-stat").text(formatNum(money_per_second, 2));
+  $("#mpf-stat").text(formatNum(money_per_follower, 2));
+  $("#fps-stat").text(formatNum(followers_per_second, 2));
   money_per_second = 0;
   followers_per_second = 0;
   for(let building in buildings) {
-    $("#" + buildings[building].id + "-price").text(buildings[building].price.toFixed(2));
-    $("#" + buildings[building].id + "-amount").text(buildings[building].count);
+    $("#" + buildings[building].id + "-price").text(formatNum(buildings[building].price, 2));
+    $("#" + buildings[building].id + "-amount").text(buildings[building].count.toLocaleString());
     if (buildings[building].unlocked) {
       $("#"+buildings[building].id + "-building").show();
       if (buildings[building].price <= money.amount) {
@@ -174,19 +177,19 @@ function reset() {
       followers.add(this.count * 0.01 * recruiting);
       followers_per_second += this.count * 0.1 * recruiting;
       $("#meeting-place-desc").text(recruiting.toFixed(0));
-      $("#meeting-place-production").text((this.count * 0.1 * recruiting).toFixed(2));
+      $("#meeting-place-production").text(formatNum(this.count * 0.1 * recruiting, 2));
     }, function() {  }, 1.2),
     new Building("church", "Church", "Recruits <span id='church-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second<br>Producing: <span id='church-production'>0</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second", 100, function() {
       followers.add(this.count * 0.1 * recruiting);
       followers_per_second += this.count * 1 * recruiting;
       $("#church-desc").text(recruiting.toFixed(0));
-      $("#church-production").text((this.count * 1 * recruiting).toFixed());
+      $("#church-production").text(formatNum(this.count * 1 * recruiting, 2));
     }, function() {  }, 1.2),
     new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per <img src='img/icons/teamwork.svg' alt='follower'> / second<br>Producing: $ <span id='sacrificial-place-production'>0</span> / second", 500, function() {
       money.add(money_per_follower * followers.amount / 10 * this.count);
       money_per_second += money_per_follower * followers.amount * this.count;
       $("#building-sacrificial-place-production").text(money_per_follower.toFixed(2));
-      $("#sacrificial-place-production").text((money_per_follower * followers.amount * this.count).toFixed(2));
+      $("#sacrificial-place-production").text(formatNum(money_per_follower * followers.amount * this.count, 2));
     }, function() {  }, 1.2)
   ];
   // Set upgrades
