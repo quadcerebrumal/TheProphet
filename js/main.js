@@ -59,7 +59,6 @@ class Building {
     this.init = init;
     this.count = 0;
     this.unlocked = false;
-    this.mps = 0;
   }
 
   execute() {
