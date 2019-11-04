@@ -81,7 +81,7 @@ class Building {
 }
 
 function formatNum(number, fractionDigits) {
-  return parseFloat(number.toFixed(fractionDigits)).toLocaleString();
+  return number.toLocaleString([], {minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits});
 }
 
 function update_display() {
@@ -270,7 +270,7 @@ function reset() {
       "<div class='block-content'>" +
       "<span>" + upgrades[upgrade].description + "</span><br><br>" +
       "<div onclick='upgrades["+upgrade+"].buy()' id='" + upgrades[upgrade].id + "-price-display' class='price'>" +
-      "<span>$ " + upgrades[upgrade].price + "</span>" +
+      "<span>$ " + formatNum(upgrades[upgrade].price, 0) + "</span>" +
       "</div>" +
       "</div>" +
       "</div>"
