@@ -328,9 +328,9 @@ function init() {
         }
       }
     }
-    window.money_per_follower = save['money_per_follower'];
-    window.followers_per_click = save['followers_per_click'];
-    window.recruiting = save['recruiting'];
+    money_per_follower = save['money_per_follower'];
+    followers_per_click = save['followers_per_click'];
+    recruiting = save['recruiting'];
   }
   window.updateDisplayIntervalID = window.setInterval(update_display, 100);
   window.tickIntervalID = window.setInterval(tick, 100);
