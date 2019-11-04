@@ -164,15 +164,15 @@ function reset() {
 
   // Set buildings
   buildings = [
-    new Building("meeting-place", "Meeting place", "Recruits <span id='meeting-place-desc'>1</span> follower in 10 seconds", 2, function() {
+    new Building("meeting-place", "Meeting place", "Recruits <span id='meeting-place-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> in 10 seconds", 2, function() {
       followers.add(this.count * 0.01 * recruiting);
       $("#meeting-place-desc").text(recruiting.toFixed(0));
     }, function() {  }, 1.2),
-    new Building("church", "Church", "Recruits <span id='church-desc'>1</span> follower per second", 100, function() {
+    new Building("church", "Church", "Recruits <span id='church-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> per second", 100, function() {
       followers.add(this.count * 0.1 * recruiting);
       $("#church-desc").text(recruiting.toFixed(0));
     }, function() {  }, 1.2),
-    new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per follower per second", 500, function() {
+    new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per <img src='img/icons/teamwork.svg' alt='follower'> per second", 500, function() {
       money.add(money_per_follower * followers.amount / 10 * this.count);
       money_per_second += money_per_follower * followers.amount * this.count;
       $("#building-sacrificial-place-production").text(money_per_follower.toFixed(2));
@@ -188,7 +188,7 @@ function reset() {
         }
       }
     }, () => {return followers.total > 10}),
-    new Upgrade("double-fee-0", "Higher fee", "Increases your followers' fee by 100%", 50, function () {
+    new Upgrade("double-fee-0", "Higher fee", "Doubles your <img src='img/icons/teamwork.svg' alt='follower(s)'>-fee", 50, function () {
       money_per_follower += money_per_follower;
     }, () => {return money.total > 200}),
     new Upgrade("unlock-church", "Unlock Church", "Unlocks the Church", 100, function () {
@@ -207,20 +207,20 @@ function reset() {
         }
       }
     }, () => {return buildings[1].count > 4}),
-    new Upgrade("ancient-relic", "Ancient relic", "Increases recruiting by 50%", 500, function () {
+    new Upgrade("ancient-relic", "Ancient relic", "Increases <img src='img/icons/teamwork.svg' alt='follower(s)'> growth-rate by 50%", 500, function () {
       recruiting += recruiting / 2;
     }, () => {return followers.total > 100 && buildings[1].unlocked}),
-    new Upgrade("ceremonies", "Ceremonies", "Increases recruiting by 50%", 1500, function () {
+    new Upgrade("ceremonies", "Ceremonies", "Increases <img src='img/icons/teamwork.svg' alt='follower(s)'> growth-rate by 50%", 1500, function () {
       recruiting += recruiting / 2;
     }, () => {return money.total > 10000}),
-    new Upgrade("sacred-texts", "Sacred Texts", "Increases recruiting by 50%", 3000, function () {
+    new Upgrade("sacred-texts", "Sacred Texts", "Increases <img src='img/icons/teamwork.svg' alt='follower(s)'> growth-rate by 50%", 3000, function () {
       recruiting += recruiting / 2;
     }, () => {return followers.total > 1000 }),
     new Upgrade("tax-exempt", "Tax-Exempt", "Removes the 30% taxes from your in-flow", 100, function () {
       money_per_follower = money_per_follower * 1.4285714;
     }, () => {return followers.total > 10000}),
-    new Upgrade("central-control", "Secret central control", "Decreases followers leaving and increases fee by 200% the cult through blackmail.", 500000, function () {
-      recruiting = recruiting * 1.5;
+    new Upgrade("central-control", "Secret central control", "Decreases <img src='img/icons/teamwork.svg' alt='follower(s)'> leaving and triples fee through blackmail.", 50000000, function () {
+      recruiting = recruiting * 1.2;
       money_per_follower = money_per_follower * 3
     }, () => {return followers.total > 100000})
   ];
