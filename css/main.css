@@ -264,13 +264,38 @@ textarea {
   }
 }
 
+/*\
+|*| Own Cascading Style Sheet
+|*| [POST HTML5 BOILERPLATE]
+\*/
+
+/* Theme colors */
+body, body.light-theme {
+  --bgColor: #fff;
+  --materialIconsColor: #9e9e9e;
+  --fgColor: #424242;
+  background-color: var(--bgColor);
+}
+body.dark-theme {
+  --bgColor: #424242;
+  --fgColor: #fff;
+  --materialIconsColor: #fff;
+}
+.material-icons {
+  color: var(--materialIconsColor);
+}
+
+.nav-wrapper {
+  background-color: var(--bgColor);
+}
 nav {
   box-shadow: none;
 }
-nav .brand-logo {
+.brand-logo {
   font-family: Bitter, serif;
-  color: #717171;
+  color: #717171 !important;
 }
+
 .sidenav li {
   line-height: inherit;
 }
@@ -291,13 +316,14 @@ nav .brand-logo {
   width: 100%;
   bottom: 0;
   z-index: 7;
-  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  box-shadow: 0 -5px 5px color-mod(var(--fgColor) alpha(20%));
+  background-color: var(--bgColor);
 }
 #recruit-btn {
   margin: 10px 0;
   height: 50px;
   width: 70%;
+  background-color: var(--bgColor);
 }
 #recruit-icon {
   height: 40px;
