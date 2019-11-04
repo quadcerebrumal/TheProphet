@@ -271,29 +271,29 @@ textarea {
 
 /* Theme colors */
 body, body.light-theme {
-  --bgColor: #fff;
-  --materialIconsColor: #9e9e9e;
-  --fgColor: #424242;
-  background-color: var(--bgColor);
+  --bgColor: 255, 255, 255;
+  --materialIconsColor: 158, 158, 158;
+  --fgColor: 66, 66, 66;
+  background-color: rgb(var(--bgColor));
 }
 body.dark-theme {
-  --bgColor: #424242;
-  --fgColor: #fff;
-  --materialIconsColor: #fff;
+  --bgColor: 66, 66, 66;
+  --fgColor: 255, 255, 255;
+  --materialIconsColor: 255, 255, 255;
 }
 .material-icons {
-  color: var(--materialIconsColor);
+  color: rgb(var(--materialIconsColor));
 }
 
 .nav-wrapper {
-  background-color: var(--bgColor);
+  background-color: rgb(var(--bgColor));
 }
 nav {
   box-shadow: none;
 }
 .brand-logo {
   font-family: Bitter, serif;
-  color: #717171 !important;
+  color: rgb(113, 113, 113) !important;
 }
 
 .sidenav li {
@@ -311,19 +311,22 @@ nav {
   font-weight: 900;
 }
 
+#placeholder {
+  height: 70px;
+}
 #recruit-btn-wrapper {
   position: fixed;
   width: 100%;
   bottom: 0;
   z-index: 7;
-  box-shadow: 0 -5px 5px color-mod(var(--fgColor) alpha(20%));
-  background-color: var(--bgColor);
+  box-shadow: 0 -5px 5px rgba(var(--fgColor), 0.2);
+  background-color: rgb(var(--bgColor));
 }
 #recruit-btn {
   margin: 10px 0;
   height: 50px;
   width: 70%;
-  background-color: var(--bgColor);
+  background-color: rgb(var(--bgColor));
 }
 #recruit-icon {
   height: 40px;
@@ -331,7 +334,7 @@ nav {
 
 span {
   font-family: Roboto, sans-serif;
-  color: #717171;
+  color: rgb(113, 113, 113);
 }
 
 #mobile-demo {
@@ -347,7 +350,7 @@ span {
   font-weight: 400;
 }
 #reset-btn {
-  background-color: #303030 !important;
+  background-color: rgb(48, 48, 48) !important;
   line-height: 20px;
   font-weight: 900;
   width: 85%;
@@ -355,7 +358,7 @@ span {
   margin-bottom: 50px;
 }
 #patreon-btn {
-  background-color: #5b8f4f !important;
+  background-color: rgb(91, 143, 79) !important;
   display: inline-block !important;
   font-weight: 900;
   width: 85%;
@@ -374,23 +377,21 @@ span {
 }
 
 .handle {
-  border-top: #d2d2d2;
-  border-top-style: solid;
-  border-top-width: 1px;
+  border-top: 1px solid rgb(210, 210, 210);
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-  background-color: #f6f6f6;
+  background-color: rgb(246, 246, 246);
   margin: 20px 0;
   padding: 5px 0;
 }
 
 .block-container {
-  border: 1px solid #d2d2d2;
+  border: 1px solid rgb(210, 210, 210);
   margin-bottom: 10px;
   font-weight: 900;
 }
 .block-title {
-  border-bottom: 1px solid #d2d2d2;
-  background-color: #ececec;
+  border-bottom: 1px solid rgb(210, 210, 210);
+  background-color: rgb(236, 236, 236);
   padding: 2px 5px;
 }
 .block-content {
@@ -400,15 +401,15 @@ span {
   border-radius: 5px;
 }
 .price span {
-  color: #fff;
+  color: rgb(var(--fgColor));
 }
 .purchased {
-  background-color: #486935;
+  background-color: rgb(72, 105, 53);
 }
 .expensive {
-  background-color: #7f7f7f;
+  background-color: rgb(127, 127, 127);
 }
 .affordable {
-  background-color: #159aea;
+  background-color: rgb(21, 154, 234);
   cursor: pointer;
 }
