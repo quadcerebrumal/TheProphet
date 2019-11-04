@@ -114,6 +114,8 @@ function update_display() {
       } else {
         $("#" + upgrades[upgrade].id + "-upgrade").hide();
       }
+    } else {
+      $("#" + upgrades[upgrade].id + "-upgrade").hide();
     }
   }
 }
