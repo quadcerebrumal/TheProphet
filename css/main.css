@@ -287,14 +287,15 @@ nav .brand-logo {
 }
 
 #recruit-btn-wrapper {
-  background-color: #FFFFFF;
-  padding: 10px 0 0 0;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   bottom: 0;
   z-index: 7;
   box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 #recruit-btn {
+  margin: 10px 0;
   height: 50px;
   width: 70%;
 }
