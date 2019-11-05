@@ -274,12 +274,16 @@ body, body.light-theme {
   --bgColor: 255, 255, 255;
   --materialIconsColor: 158, 158, 158;
   --fgColor: 66, 66, 66;
+  --txtColor: 113, 113, 113;
+  --recruitButtonColor: var(--fgColor);
   background-color: rgb(var(--bgColor));
 }
 body.dark-theme {
   --bgColor: 66, 66, 66;
   --fgColor: 255, 255, 255;
   --materialIconsColor: 255, 255, 255;
+  --txtColor: 220, 220, 220;
+  --recruitButtonColor: '';
 }
 .material-icons {
   color: rgb(var(--materialIconsColor));
@@ -293,7 +297,7 @@ nav {
 }
 .brand-logo {
   font-family: Bitter, serif;
-  color: rgb(113, 113, 113) !important;
+  color: rgb(var(--txtColor)) !important;
 }
 
 .sidenav li {
@@ -326,7 +330,7 @@ nav {
   margin: 10px 0;
   height: 50px;
   width: 70%;
-  background-color: rgb(var(--fgColor));
+  background-color: rgb(var(--recruitButtonColor));
   color: rgb(var(--bgColor));
 }
 #recruit-icon {
@@ -335,7 +339,7 @@ nav {
 
 span {
   font-family: Roboto, sans-serif;
-  color: rgb(113, 113, 113);
+  color: rgb(var(--txtColor));
 }
 
 #mobile-demo {
