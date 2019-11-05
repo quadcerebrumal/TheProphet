@@ -313,6 +313,11 @@ function init() {
   document.getElementById("recruit-btn").onclick = function () {
     followers.add(followers_per_click * recruiting);
   };
+  $('#recruit-btn').keypress(function (e) {
+    let code = e.keyCode || e.which;
+    if (code === 13)
+      e.preventDefault();
+  });
   // Make the reset button reset
   document.getElementById("reset-btn").onclick = function () {
     reset();
