@@ -327,6 +327,7 @@ nav {
   height: 50px;
   width: 70%;
   background-color: rgb(var(--fgColor));
+  color: rgb(var(--bgColor));
 }
 #recruit-icon {
   height: 40px;
@@ -378,8 +379,8 @@ span {
 
 .handle {
   border-top: 1px solid rgb(210, 210, 210);
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-  background-color: rgb(246, 246, 246);
+  box-shadow: 0 5px 5px rgba(var(--fgColor), 0.2);
+  background-color: rgb(var(--bgColor));
   margin: 20px 0;
   padding: 5px 0;
 }

@@ -84,6 +84,14 @@ function formatNum(number, fractionDigits) {
   return number.toLocaleString([], {minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits});
 }
 
+function toggleTheme(){
+  // Default to light theme, since that is starting theme
+  window.theme = typeof(window.theme)==='string' ? window.theme : 'light-theme';
+  let switchToTheme = window.theme === 'light-theme' ? 'dark-theme' : 'light-theme';
+  window.theme = switchToTheme;
+  $("body").addClass(switchToTheme).removeClass(window.theme === 'light-theme' ? 'dark-theme' : 'light-theme');
+}
+
 function update_display() {
   $("#follower-stat").text(formatNum(followers.amount, 0));
   $("#money-stat").text(formatNum(money.amount, 2));
