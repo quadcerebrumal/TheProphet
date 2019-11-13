@@ -7,6 +7,7 @@ let followers;
 let money;
 let buildings;
 let upgrades;
+let timer;
 
 class Wallet {
   constructor() {
@@ -373,8 +374,11 @@ function init() {
     followers_per_click = save['followers_per_click'];
     recruiting = save['recruiting'];
   }
-  window.updateDisplayIntervalID = window.setInterval(update_display, 100);
-  window.tickIntervalID = window.setInterval(tick, 100);
+  timer = new Worker('js/timer.js');
+  timer.onmessage = (e) => {
+    tick();
+    update_display();
+  };
   window.saveIntervalID = window.setInterval(save, 5000);
 }
 
