@@ -386,9 +386,11 @@ function init() {
     recruiting = save['recruiting'];
   }
   timer = new Worker('js/timer.js');
-  timer.onmessage = (e) => {
-    tick();
-    update_display();
+  timer.onmessage = (ev) => {
+    if(ev.data === 100) {
+      tick();
+      update_display();
+    }
   };
   window.saveIntervalID = window.setInterval(save, 5000);
   window.titleIntervalID = window.setInterval(() => {

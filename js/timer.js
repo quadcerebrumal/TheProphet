@@ -1,3 +1,3 @@
 timerID = setInterval(function () {
-  postMessage(null)
+  postMessage(100);
 }, 100);
