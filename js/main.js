@@ -313,9 +313,9 @@ function reset() {
       "<div class='block-content'>" +
       "<span>" + buildings[building].description + "</span><br>" +
       "<span>You have: <span id='" + buildings[building].id + "-amount'></span></span>" +
-      "<div onclick='buildings[" + building + "].buy()' id='" + buildings[building].id + "-price-display' class='price'>" +
+      "<button onclick='buildings[" + building + "].buy()' id='" + buildings[building].id + "-price-display' class='price'>" +
       "<span>$ <span id='" + buildings[building].id + "-price'>" + buildings[building].price + "</span></span>" +
-      "</div>" +
+      "</button>" +
       "</div>" +
       "</div>";
 
@@ -332,9 +332,9 @@ function reset() {
       "</div>" +
       "<div class='block-content'>" +
       "<span>" + upgrades[upgrade].description + "</span><br><br>" +
-      "<div onclick='upgrades[" + upgrade + "].buy()' id='" + upgrades[upgrade].id + "-price-display' class='price'>" +
+      "<button onclick='upgrades[" + upgrade + "].buy()' id='" + upgrades[upgrade].id + "-price-display' class='price'>" +
       "<span>$ " + formatNum(upgrades[upgrade].price, 0) + "</span>" +
-      "</div>" +
+      "</button>" +
       "</div>" +
       "</div>"
       + document.getElementById("upgrades-card").innerHTML;

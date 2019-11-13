@@ -404,17 +404,19 @@ span {
 }
 .price {
   border-radius: 5px;
+  border-style: none;
+  width: 100%;
 }
 .price span {
   color: rgb(var(--bgColor));
 }
 .purchased {
-  background-color: rgb(72, 105, 53);
+  background-color: rgb(72, 105, 53) !important;
 }
 .expensive {
-  background-color: rgb(127, 127, 127);
+  background-color: rgb(127, 127, 127) !important;
 }
 .affordable {
-  background-color: rgb(21, 154, 234);
+  background-color: rgb(21, 154, 234) !important;
   cursor: pointer;
 }
