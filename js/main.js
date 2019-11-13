@@ -189,10 +189,16 @@ function reset() {
     }, function() {  }, 1.2),
     new Building("church", "Church", "Recruits <span id='church-desc'>1</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second<br>Producing: <span id='church-production'>0</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second", 100, function() {
       followers.add(this.count * 0.1 * recruiting);
-      followers_per_second += this.count * 1 * recruiting;
+      followers_per_second += this.count * recruiting;
       $("#church-desc").text(recruiting.toFixed(0));
       $("#church-production").text(formatNum(this.count * 1 * recruiting, 2));
     }, function() {  }, 1.2),
+    new Building("temple", "Temple", "Recruits <span id='temple-desc'>10</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second<br>Producing: <span id='temple-production'>0</span> <img src='img/icons/teamwork.svg' alt='follower(s)'> / second", 20000, function() {
+      followers.add(this.count * recruiting);
+      followers_per_second += this.count * 10 * recruiting;
+      $("#temple-desc").text((recruiting * 10).toFixed(0));
+      $("#temple-production").text(formatNum(this.count * 10 * recruiting, 2));
+    }, function() { }, 1.2),
     new Building("sacrificial-place", "Sacrificial Place", "Produces $ <span id='building-sacrificial-place-production'>0.01</span> per <img src='img/icons/teamwork.svg' alt='follower'> / second<br>Producing: $ <span id='sacrificial-place-production'>0</span> / second", 500, function() {
       money.add(money_per_follower * followers.amount / 10 * this.count);
       money_per_second += money_per_follower * followers.amount * this.count;
@@ -244,7 +250,15 @@ function reset() {
     new Upgrade("central-control", "Secret central control", "Better indoctrination (20% higher <img src='img/icons/teamwork.svg' alt='follower(s)'> growth) and triples fee through blackmail.", 5000000000, function () {
       recruiting = recruiting * 1.2;
       money_per_follower = money_per_follower * 3
-    }, () => {return upgrades[7].owned})
+    }, () => {return upgrades[7].owned}),
+    new Upgrade("unlock-temple", "Unlock Temple", "Unlocks the Temple", 10000, function () {
+      for(let building in buildings) {
+        if(buildings[building].id === "temple") {
+          buildings[building].unlock();
+          break;
+        }
+      }
+    }, () => { return money.total > 10000 && money.amount > 1000 })
   ];
 
   // Put the buildings into the buildings tab
