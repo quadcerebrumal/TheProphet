@@ -374,11 +374,12 @@ function init() {
       e.preventDefault();
   });
   // Make the reset button reset
-  document.getElementById("reset-btn").onclick = function () {
-    reset();
-    M.toast({html: "Your game was reset."});
+  document.getElementById("reset-btn").onclick = () => {
+    if (confirm("This will reset your game with no benefit on your side. Continue anyway?")) {
+      reset();
+      M.toast({html: "Your game was reset."});
+    }
   };
-
 
   // Read localStorage save if possible
   if (window.localStorage.getItem("save") !== null) {
