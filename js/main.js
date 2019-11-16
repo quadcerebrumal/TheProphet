@@ -350,7 +350,7 @@ function init() {
     'url': "notice.json",
     'dataType': "json",
     'success': function (data) {
-      console.log("Running version " + data['version']['string'] + " ( " + data['version']['float'].toString() + " )");
+      console.log(`Running version ${data['version']['string']} ( ${data['version']['float'].toString()} )`);
       $("#version-notice").text(data['version']['string']);
     }
   });
