@@ -299,6 +299,11 @@ nav {
   font-family: Bitter, serif;
   color: rgb(var(--txtColor)) !important;
 }
+@media only screen and (max-device-width: 388px) {
+  .brand-logo {
+    font-size: 1.7em !important;
+  }
+}
 
 .sidenav li {
   line-height: inherit;
