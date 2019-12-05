@@ -1,5 +1,6 @@
 # www.robotstxt.org/
 
+Sitemap: https://quadcerebrumal.github.io/TheProphet/sitemap.xml
 # Disallow crawling of all content
 User-agent: *
 Disallow: /
